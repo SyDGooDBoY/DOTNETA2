@@ -52,3 +52,60 @@ CodeCoverage/
 *.VisualState.xml
 TestResult.xml
 nunit-*.xml
+
+# Visual Studio IDE
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Tt]emp/
+
+# Visual Studio Code workspace (if you also use VS Code)
+.vscode/
+
+# Test results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# Backup and temporary files
+*.bak
+*.tmp
+*.temp
+*.log
+
+# NuGet packages
+*.nupkg
+packages/
+*.snupkg
+*.nuspec
+project.lock.json
+project.fragment.lock.json
+
+# Generated files
+*_i.c
+*_p.c
+*_h.h
+*.ilk
+*.meta
+*.obj
+*.pdb
+*.idb
+*.tlog
+*.lastcodeanalysissucceeded
+
+# ReSharper
+_ReSharper*/
+*.DotSettings.user
+
+# Rider
+.idea/
+
+# Windows specific
+Thumbs.db
+Desktop.ini
