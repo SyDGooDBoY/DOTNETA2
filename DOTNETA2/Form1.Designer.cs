@@ -144,6 +144,7 @@
             // 
             // button1
             // 
+            button1.BackColor = Color.Gray;
             button1.FlatAppearance.BorderSize = 0;
             button1.FlatAppearance.MouseOverBackColor = Color.FromArgb(224, 224, 224);
             button1.FlatStyle = FlatStyle.Flat;
