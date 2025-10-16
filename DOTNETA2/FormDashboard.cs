@@ -16,8 +16,24 @@ namespace DOTNETA2
         {
             InitializeComponent();
             timerTime.Start();
+            this.Load += FormDashboard_Load;
         }
 
+        //load form
+        private void FormDashboard_Load(object sender, EventArgs e)
+        {
+            //usercontrol hide
+            
+            userControlTrans1.Hide();
+            userControlReport1.Hide();
+            userControlBudget1.Hide();
+            userControlAdvise1.Hide();
+
+            //when open show dashboard
+            userControlDashboard1.Show();
+            userControlDashboard1.BringToFront();
+
+        }
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
 
@@ -25,7 +41,14 @@ namespace DOTNETA2
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            //show current usercontrol dashboard
+            userControlDashboard1.Show();
+            userControlDashboard1.BringToFront();
+            //hide other usercontrol
+            userControlTrans1.Hide();
+            userControlReport1.Hide();
+            userControlBudget1.Hide();
+            userControlAdvise1.Hide();
         }
 
         private void timerTime_Tick(object sender, EventArgs e)
@@ -37,6 +60,57 @@ namespace DOTNETA2
 
         private void label1_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //show current usercontrol transaction
+            userControlTrans1.Show();
+            userControlTrans1.BringToFront();
+
+            //hide other usercontrol
+            userControlDashboard1.Hide();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //show current usercontrol advise
+            userControlAdvise1.Show();
+            userControlAdvise1.BringToFront();
+
+            //hide other usercontrol
+            userControlDashboard1.Hide();
+            userControlTrans1.Hide();
+            userControlReport1.Hide();
+            userControlBudget1.Hide();
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //show current usercontrol budget
+            userControlBudget1.Show();
+            userControlBudget1.BringToFront();
+
+            //hide other usercontrol
+            userControlDashboard1.Hide();
+            userControlTrans1.Hide();
+            userControlReport1.Hide();
+            userControlAdvise1.Hide();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //show current usercontrol report
+            userControlReport1.Show();
+            userControlReport1.BringToFront();
+
+            //hide other usercontrol
+            userControlDashboard1.Hide();
+            userControlTrans1.Hide();
+            userControlBudget1.Hide();
+            userControlAdvise1.Hide();
 
         }
     }

@@ -38,14 +38,17 @@
             button1 = new Button();
             pictureBox1 = new PictureBox();
             panel2 = new Panel();
-            panel3 = new Panel();
-            label1 = new Label();
             label2 = new Label();
             labelTime = new Label();
             timerTime = new System.Windows.Forms.Timer(components);
+            userControlDashboard1 = new UserControlDashboard();
+            userControlTrans1 = new UserControlTrans();
+            userControlDashboard2 = new UserControlDashboard();
+            userControlAdvise1 = new UserControlAdvise();
+            userControlBudget1 = new UserControlBudget();
+            userControlReport1 = new UserControlReport();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            panel3.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -58,9 +61,9 @@
             panel1.Controls.Add(button1);
             panel1.Controls.Add(pictureBox1);
             panel1.Controls.Add(panel2);
-            panel1.Location = new Point(-4, -13);
+            panel1.Location = new Point(-4, -16);
             panel1.Name = "panel1";
-            panel1.Size = new Size(244, 633);
+            panel1.Size = new Size(238, 636);
             panel1.TabIndex = 0;
             // 
             // button5
@@ -78,6 +81,7 @@
             button5.TabIndex = 7;
             button5.Text = "Report";
             button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
             // 
             // button4
             // 
@@ -94,6 +98,7 @@
             button4.TabIndex = 6;
             button4.Text = "Budget";
             button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
             // 
             // button3
             // 
@@ -110,6 +115,7 @@
             button3.TabIndex = 5;
             button3.Text = "Advise";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // button2
             // 
@@ -126,6 +132,7 @@
             button2.TabIndex = 4;
             button2.Text = "Transaction";
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // button1
             // 
@@ -163,27 +170,6 @@
             panel2.TabIndex = 1;
             panel2.Paint += panel2_Paint;
             // 
-            // panel3
-            // 
-            panel3.BackColor = Color.FromArgb(0, 71, 160);
-            panel3.Controls.Add(label1);
-            panel3.Location = new Point(240, 37);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(823, 106);
-            panel3.TabIndex = 1;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Century Gothic", 17.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.White;
-            label1.Location = new Point(19, 37);
-            label1.Name = "label1";
-            label1.Size = new Size(284, 27);
-            label1.TabIndex = 2;
-            label1.Text = "Welcome to Dashboard";
-            label1.Click += label1_Click;
-            // 
             // label2
             // 
             label2.AutoSize = true;
@@ -198,7 +184,7 @@
             // labelTime
             // 
             labelTime.AutoSize = true;
-            labelTime.Location = new Point(964, 14);
+            labelTime.Location = new Point(965, 11);
             labelTime.Name = "labelTime";
             labelTime.Size = new Size(70, 17);
             labelTime.TabIndex = 3;
@@ -208,22 +194,67 @@
             // 
             timerTime.Tick += timerTime_Tick;
             // 
+            // userControlDashboard1
+            // 
+            userControlDashboard1.Location = new Point(302, 169);
+            userControlDashboard1.Name = "userControlDashboard1";
+            userControlDashboard1.Size = new Size(669, 432);
+            userControlDashboard1.TabIndex = 4;
+            // 
+            // userControlTrans1
+            // 
+            userControlTrans1.Location = new Point(250, 149);
+            userControlTrans1.Name = "userControlTrans1";
+            userControlTrans1.Size = new Size(801, 453);
+            userControlTrans1.TabIndex = 5;
+            // 
+            // userControlDashboard2
+            // 
+            userControlDashboard2.Location = new Point(245, 149);
+            userControlDashboard2.Name = "userControlDashboard2";
+            userControlDashboard2.Size = new Size(806, 463);
+            userControlDashboard2.TabIndex = 6;
+            // 
+            // userControlAdvise1
+            // 
+            userControlAdvise1.Location = new Point(243, 143);
+            userControlAdvise1.Name = "userControlAdvise1";
+            userControlAdvise1.Size = new Size(817, 469);
+            userControlAdvise1.TabIndex = 7;
+            // 
+            // userControlBudget1
+            // 
+            userControlBudget1.Location = new Point(240, 143);
+            userControlBudget1.Name = "userControlBudget1";
+            userControlBudget1.Size = new Size(820, 469);
+            userControlBudget1.TabIndex = 8;
+            // 
+            // userControlReport1
+            // 
+            userControlReport1.Location = new Point(234, 33);
+            userControlReport1.Name = "userControlReport1";
+            userControlReport1.Size = new Size(827, 580);
+            userControlReport1.TabIndex = 9;
+            // 
             // FormDashboard
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1063, 614);
+            Controls.Add(userControlReport1);
+            Controls.Add(userControlBudget1);
+            Controls.Add(userControlAdvise1);
+            Controls.Add(userControlDashboard2);
+            Controls.Add(userControlTrans1);
+            Controls.Add(userControlDashboard1);
             Controls.Add(labelTime);
             Controls.Add(label2);
-            Controls.Add(panel3);
             Controls.Add(panel1);
             Name = "FormDashboard";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Daily Expenses Tracker";
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            panel3.ResumeLayout(false);
-            panel3.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -233,15 +264,19 @@
         private Panel panel1;
         private Panel panel2;
         private PictureBox pictureBox1;
-        private Panel panel3;
         private Button button5;
         private Button button4;
         private Button button3;
         private Button button2;
         private Button button1;
-        private Label label1;
         private Label label2;
         private Label labelTime;
         private System.Windows.Forms.Timer timerTime;
+        private UserControlDashboard userControlDashboard1;
+        private UserControlTrans userControlTrans1;
+        private UserControlDashboard userControlDashboard2;
+        private UserControlAdvise userControlAdvise1;
+        private UserControlBudget userControlBudget1;
+        private UserControlReport userControlReport1;
     }
 }
