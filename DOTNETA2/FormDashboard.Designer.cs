@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDashboard));
             panel1 = new Panel();
             button5 = new Button();
@@ -39,7 +40,9 @@
             panel2 = new Panel();
             panel3 = new Panel();
             label1 = new Label();
-            panel4 = new Panel();
+            label2 = new Label();
+            labelTime = new Label();
+            timerTime = new System.Windows.Forms.Timer(components);
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel3.SuspendLayout();
@@ -55,79 +58,95 @@
             panel1.Controls.Add(button1);
             panel1.Controls.Add(pictureBox1);
             panel1.Controls.Add(panel2);
-            panel1.Location = new Point(-4, 1);
+            panel1.Location = new Point(-5, -15);
+            panel1.Margin = new Padding(4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(244, 620);
+            panel1.Size = new Size(314, 745);
             panel1.TabIndex = 0;
             // 
             // button5
             // 
             button5.FlatAppearance.BorderSize = 0;
+            button5.FlatAppearance.MouseOverBackColor = Color.FromArgb(224, 224, 224);
             button5.FlatStyle = FlatStyle.Flat;
             button5.Font = new Font("Century Gothic", 14.25F, FontStyle.Bold);
             button5.ForeColor = Color.White;
-            button5.Location = new Point(2, 524);
+            button5.Image = (Image)resources.GetObject("button5.Image");
+            button5.ImageAlign = ContentAlignment.MiddleLeft;
+            button5.Location = new Point(3, 616);
+            button5.Margin = new Padding(4);
             button5.Name = "button5";
-            button5.Size = new Size(241, 90);
+            button5.Size = new Size(310, 106);
             button5.TabIndex = 7;
-            button5.Text = "button5";
+            button5.Text = "Report";
             button5.UseVisualStyleBackColor = true;
             // 
             // button4
             // 
             button4.FlatAppearance.BorderSize = 0;
+            button4.FlatAppearance.MouseOverBackColor = Color.FromArgb(224, 224, 224);
             button4.FlatStyle = FlatStyle.Flat;
             button4.Font = new Font("Century Gothic", 14.25F, FontStyle.Bold);
             button4.ForeColor = Color.White;
-            button4.Location = new Point(3, 425);
+            button4.Image = (Image)resources.GetObject("button4.Image");
+            button4.ImageAlign = ContentAlignment.MiddleLeft;
+            button4.Location = new Point(4, 500);
+            button4.Margin = new Padding(4);
             button4.Name = "button4";
-            button4.Size = new Size(241, 103);
+            button4.Size = new Size(310, 121);
             button4.TabIndex = 6;
-            button4.Text = "button4";
+            button4.Text = "Budget";
             button4.UseVisualStyleBackColor = true;
             // 
             // button3
             // 
             button3.FlatAppearance.BorderSize = 0;
+            button3.FlatAppearance.MouseOverBackColor = Color.FromArgb(224, 224, 224);
             button3.FlatStyle = FlatStyle.Flat;
             button3.Font = new Font("Century Gothic", 14.25F, FontStyle.Bold);
             button3.ForeColor = Color.White;
-            button3.Location = new Point(3, 332);
+            button3.Image = (Image)resources.GetObject("button3.Image");
+            button3.ImageAlign = ContentAlignment.MiddleLeft;
+            button3.Location = new Point(4, 391);
+            button3.Margin = new Padding(4);
             button3.Name = "button3";
-            button3.Size = new Size(241, 94);
+            button3.Size = new Size(310, 111);
             button3.TabIndex = 5;
-            button3.Text = "button3";
+            button3.Text = "Advise";
             button3.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
             button2.FlatAppearance.BorderSize = 0;
+            button2.FlatAppearance.MouseOverBackColor = Color.FromArgb(224, 224, 224);
             button2.FlatStyle = FlatStyle.Flat;
             button2.Font = new Font("Century Gothic", 14.25F, FontStyle.Bold);
             button2.ForeColor = Color.White;
             button2.Image = (Image)resources.GetObject("button2.Image");
             button2.ImageAlign = ContentAlignment.MiddleLeft;
-            button2.Location = new Point(2, 247);
+            button2.Location = new Point(3, 291);
+            button2.Margin = new Padding(4);
             button2.Name = "button2";
-            button2.Size = new Size(242, 93);
+            button2.Size = new Size(311, 109);
             button2.TabIndex = 4;
-            button2.Text = "Tansaction";
+            button2.Text = "Transaction";
             button2.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
             button1.FlatAppearance.BorderColor = Color.White;
             button1.FlatAppearance.BorderSize = 0;
-            button1.FlatAppearance.MouseDownBackColor = Color.FromArgb(224, 224, 224);
+            button1.FlatAppearance.MouseDownBackColor = SystemColors.ActiveCaption;
             button1.FlatAppearance.MouseOverBackColor = Color.Silver;
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Century Gothic", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             button1.ForeColor = Color.White;
             button1.Image = (Image)resources.GetObject("button1.Image");
             button1.ImageAlign = ContentAlignment.MiddleLeft;
-            button1.Location = new Point(3, 153);
+            button1.Location = new Point(4, 183);
+            button1.Margin = new Padding(4);
             button1.Name = "button1";
-            button1.Size = new Size(241, 102);
+            button1.Size = new Size(310, 120);
             button1.TabIndex = 3;
             button1.Text = "Dashboard";
             button1.UseVisualStyleBackColor = true;
@@ -136,17 +155,19 @@
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(62, 11);
+            pictureBox1.Location = new Point(74, 18);
+            pictureBox1.Margin = new Padding(4);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(147, 147);
+            pictureBox1.Size = new Size(169, 165);
             pictureBox1.TabIndex = 2;
             pictureBox1.TabStop = false;
             // 
             // panel2
             // 
-            panel2.Location = new Point(240, 3);
+            panel2.Location = new Point(309, 4);
+            panel2.Margin = new Padding(4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(774, 58);
+            panel2.Size = new Size(995, 68);
             panel2.TabIndex = 1;
             panel2.Paint += panel2_Paint;
             // 
@@ -154,37 +175,61 @@
             // 
             panel3.BackColor = Color.FromArgb(0, 71, 160);
             panel3.Controls.Add(label1);
-            panel3.Controls.Add(panel4);
-            panel3.Location = new Point(239, 45);
+            panel3.Location = new Point(308, 43);
+            panel3.Margin = new Padding(4);
             panel3.Name = "panel3";
-            panel3.Size = new Size(824, 106);
+            panel3.Size = new Size(1058, 125);
             panel3.TabIndex = 1;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Century Gothic", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Font = new Font("Century Gothic", 17.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(28, 64);
+            label1.Location = new Point(24, 43);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(260, 22);
+            label1.Size = new Size(356, 36);
             label1.TabIndex = 2;
-            label1.Text = "WELCOME TO DASHBOARD";
+            label1.Text = "Welcome to Dashboard";
+            label1.Click += label1_Click;
             // 
-            // panel4
+            // label2
             // 
-            panel4.Location = new Point(240, 3);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(774, 58);
-            panel4.TabIndex = 1;
+            label2.AutoSize = true;
+            label2.Font = new Font("Century Gothic", 17.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.ForeColor = Color.FromArgb(0, 71, 160);
+            label2.Location = new Point(321, 2);
+            label2.Margin = new Padding(4, 0, 4, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(336, 36);
+            label2.TabIndex = 2;
+            label2.Text = "Daily Expenses Tracker";
+            // 
+            // labelTime
+            // 
+            labelTime.AutoSize = true;
+            labelTime.Location = new Point(1240, 17);
+            labelTime.Margin = new Padding(4, 0, 4, 0);
+            labelTime.Name = "labelTime";
+            labelTime.Size = new Size(89, 20);
+            labelTime.TabIndex = 3;
+            labelTime.Text = "HH:MM:SS";
+            // 
+            // timerTime
+            // 
+            timerTime.Tick += timerTime_Tick;
             // 
             // FormDashboard
             // 
-            AutoScaleDimensions = new SizeF(7F, 17F);
+            AutoScaleDimensions = new SizeF(9F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1063, 614);
+            ClientSize = new Size(1367, 722);
+            Controls.Add(labelTime);
+            Controls.Add(label2);
             Controls.Add(panel3);
             Controls.Add(panel1);
+            Margin = new Padding(4);
             Name = "FormDashboard";
             Text = "FormDashboard";
             panel1.ResumeLayout(false);
@@ -192,6 +237,7 @@
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -200,12 +246,14 @@
         private Panel panel2;
         private PictureBox pictureBox1;
         private Panel panel3;
-        private Panel panel4;
         private Button button5;
         private Button button4;
         private Button button3;
         private Button button2;
         private Button button1;
         private Label label1;
+        private Label label2;
+        private Label labelTime;
+        private System.Windows.Forms.Timer timerTime;
     }
 }

@@ -15,6 +15,7 @@ namespace DOTNETA2
         public FormDashboard()
         {
             InitializeComponent();
+            timerTime.Start();
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
@@ -23,6 +24,18 @@ namespace DOTNETA2
         }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void timerTime_Tick(object sender, EventArgs e)
+        {
+            //show time on screen
+            DateTime dt = DateTime.Now;
+            labelTime.Text = dt.ToString("HH:mm:ss");
+        }
+
+        private void label1_Click(object sender, EventArgs e)
         {
 
         }
