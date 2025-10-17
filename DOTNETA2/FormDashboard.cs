@@ -23,7 +23,7 @@ namespace DOTNETA2
         private void FormDashboard_Load(object sender, EventArgs e)
         {
             //usercontrol hide
-            
+            userControlDashboard1.Show();
             userControlTrans1.Hide();
             userControlReport1.Hide();
             userControlBudget1.Hide();
@@ -40,6 +40,7 @@ namespace DOTNETA2
             //show current usercontrol dashboard
             userControlDashboard1.Show();
             userControlDashboard1.BringToFront();
+            
             //hide other usercontrol
             userControlTrans1.Hide();
             userControlReport1.Hide();

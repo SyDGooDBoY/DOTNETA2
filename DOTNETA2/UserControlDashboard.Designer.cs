@@ -38,7 +38,7 @@
             label1.Name = "label1";
             label1.Size = new Size(112, 17);
             label1.TabIndex = 0;
-            label1.Text = "This is dashboard";
+            label1.Text = " ";
             // 
             // UserControlDashboard
             // 
