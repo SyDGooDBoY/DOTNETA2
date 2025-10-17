@@ -47,6 +47,7 @@
             Controls.Add(label1);
             Name = "UserControlDashboard";
             Size = new Size(669, 432);
+            Load += UserControlDashboard_Load;
             ResumeLayout(false);
             PerformLayout();
         }

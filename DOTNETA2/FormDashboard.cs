@@ -29,10 +29,6 @@ namespace DOTNETA2
             userControlBudget1.Hide();
             userControlAdvise1.Hide();
 
-            //when open show dashboard
-            userControlDashboard1.Show();
-            userControlDashboard1.BringToFront();
-
         }
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
