@@ -39,6 +39,7 @@
             flowLayoutPanel2 = new FlowLayoutPanel();
             lblExpenseTitle = new Label();
             lblExpenseValue = new Label();
+            panelMonthlyHost = new Panel();
             panel1.SuspendLayout();
             panelBalance.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
@@ -170,10 +171,19 @@
             lblExpenseValue.TabIndex = 1;
             lblExpenseValue.Text = "label1";
             // 
+            // panelMonthlyHost
+            // 
+            panelMonthlyHost.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            panelMonthlyHost.Location = new Point(61, 258);
+            panelMonthlyHost.Name = "panelMonthlyHost";
+            panelMonthlyHost.Size = new Size(314, 277);
+            panelMonthlyHost.TabIndex = 5;
+            // 
             // UserControlDashboard
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(panelMonthlyHost);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(panelBalance);
             Controls.Add(flowLayoutPanel2);
@@ -204,5 +214,6 @@
         private FlowLayoutPanel flowLayoutPanel2;
         private Label lblExpenseTitle;
         private Label lblExpenseValue;
+        private Panel panelMonthlyHost;
     }
 }
