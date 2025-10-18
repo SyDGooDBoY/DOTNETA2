@@ -43,7 +43,6 @@
             timerTime = new System.Windows.Forms.Timer(components);
             userControlDashboard1 = new UserControlDashboard();
             userControlTrans1 = new UserControlTrans();
-            userControlDashboard2 = new UserControlDashboard();
             userControlAdvise1 = new UserControlAdvise();
             userControlBudget1 = new UserControlBudget();
             userControlReport1 = new UserControlReport();
@@ -196,44 +195,39 @@
             // 
             // userControlDashboard1
             // 
-            userControlDashboard1.Location = new Point(302, 169);
+            userControlDashboard1.Location = new Point(234, 33);
             userControlDashboard1.Name = "userControlDashboard1";
-            userControlDashboard1.Size = new Size(669, 432);
+            userControlDashboard1.Size = new Size(920, 580);
             userControlDashboard1.TabIndex = 4;
             // 
             // userControlTrans1
             // 
-            userControlTrans1.Location = new Point(250, 149);
+            userControlTrans1.Location = new Point(233, 33);
+            userControlTrans1.Margin = new Padding(0);
             userControlTrans1.Name = "userControlTrans1";
-            userControlTrans1.Size = new Size(801, 453);
+            userControlTrans1.Size = new Size(836, 580);
             userControlTrans1.TabIndex = 5;
-            // 
-            // userControlDashboard2
-            // 
-            userControlDashboard2.Location = new Point(245, 149);
-            userControlDashboard2.Name = "userControlDashboard2";
-            userControlDashboard2.Size = new Size(806, 463);
-            userControlDashboard2.TabIndex = 6;
             // 
             // userControlAdvise1
             // 
-            userControlAdvise1.Location = new Point(243, 143);
+            userControlAdvise1.Location = new Point(233, 33);
             userControlAdvise1.Name = "userControlAdvise1";
-            userControlAdvise1.Size = new Size(817, 469);
+            userControlAdvise1.Size = new Size(835, 580);
             userControlAdvise1.TabIndex = 7;
             // 
             // userControlBudget1
             // 
-            userControlBudget1.Location = new Point(240, 143);
+            userControlBudget1.Location = new Point(234, 33);
+            userControlBudget1.Margin = new Padding(0);
             userControlBudget1.Name = "userControlBudget1";
-            userControlBudget1.Size = new Size(820, 469);
+            userControlBudget1.Size = new Size(835, 580);
             userControlBudget1.TabIndex = 8;
             // 
             // userControlReport1
             // 
             userControlReport1.Location = new Point(234, 33);
             userControlReport1.Name = "userControlReport1";
-            userControlReport1.Size = new Size(920, 580);
+            userControlReport1.Size = new Size(835, 580);
             userControlReport1.TabIndex = 9;
             // 
             // FormDashboard
@@ -244,7 +238,6 @@
             Controls.Add(userControlReport1);
             Controls.Add(userControlBudget1);
             Controls.Add(userControlAdvise1);
-            Controls.Add(userControlDashboard2);
             Controls.Add(userControlTrans1);
             Controls.Add(userControlDashboard1);
             Controls.Add(labelTime);
@@ -274,7 +267,6 @@
         private System.Windows.Forms.Timer timerTime;
         private UserControlDashboard userControlDashboard1;
         private UserControlTrans userControlTrans1;
-        private UserControlDashboard userControlDashboard2;
         private UserControlAdvise userControlAdvise1;
         private UserControlBudget userControlBudget1;
         private UserControlReport userControlReport1;

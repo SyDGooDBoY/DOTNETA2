@@ -28,31 +28,49 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
+            panel1 = new Panel();
+            label2 = new Label();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
-            // label1
+            // panel1
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(207, 176);
-            label1.Name = "label1";
-            label1.Size = new Size(112, 17);
-            label1.TabIndex = 0;
-            label1.Text = "This is transaction";
+            panel1.BackColor = Color.FromArgb(0, 71, 160);
+            panel1.Controls.Add(label2);
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new Point(0, 0);
+            panel1.Margin = new Padding(0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(687, 66);
+            panel1.TabIndex = 2;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Century Gothic", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(61, 25);
+            label2.Name = "label2";
+            label2.Size = new Size(258, 24);
+            label2.TabIndex = 0;
+            label2.Text = "Welcome to Transaction";
+            label2.Click += label2_Click;
             // 
             // UserControlTrans
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(label1);
+            Controls.Add(panel1);
             Name = "UserControlTrans";
             Size = new Size(687, 434);
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
-        private Label label1;
+        private Panel panel1;
+        private Label label2;
     }
 }
