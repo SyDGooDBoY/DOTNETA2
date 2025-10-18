@@ -22,38 +22,197 @@
 
         #region 组件设计器生成的代码
 
-        /// <summary> 
-        /// 设计器支持所需的方法 - 不要修改
-        /// 使用代码编辑器修改此方法的内容。
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
             label1 = new Label();
+            chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            listView1 = new ListView();
+            label2 = new Label();
+            label3 = new Label();
+            label4 = new Label();
+            label5 = new Label();
+            label6 = new Label();
+            label7 = new Label();
+            label8 = new Label();
+            ((System.ComponentModel.ISupportInitialize)chart1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)chart2).BeginInit();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(256, 191);
+            label1.Location = new Point(512, 348);
+            label1.Margin = new Padding(6, 0, 6, 0);
             label1.Name = "label1";
-            label1.Size = new Size(112, 17);
+            label1.Size = new Size(21, 31);
             label1.TabIndex = 0;
             label1.Text = " ";
             // 
+            // chart1
+            // 
+            chartArea1.Name = "ChartArea1";
+            chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            chart1.Legends.Add(legend1);
+            chart1.Location = new Point(3, 3);
+            chart1.Name = "chart1";
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series1.IsValueShownAsLabel = true;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            chart1.Series.Add(series1);
+            chart1.Size = new Size(779, 430);
+            chart1.TabIndex = 1;
+            chart1.Text = "chart1";
+            title1.Name = "Title1";
+            title1.Text = "Details of expenditure classification -- October";
+            chart1.Titles.Add(title1);
+            // 
+            // chart2
+            // 
+            chartArea2.AxisX.Maximum = 12D;
+            chartArea2.AxisX.Minimum = 1D;
+            chartArea2.Name = "ChartArea1";
+            chart2.ChartAreas.Add(chartArea2);
+            legend2.Enabled = false;
+            legend2.Name = "Legend1";
+            chart2.Legends.Add(legend2);
+            chart2.Location = new Point(3, 439);
+            chart2.Name = "chart2";
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            chart2.Series.Add(series2);
+            chart2.Size = new Size(779, 482);
+            chart2.TabIndex = 2;
+            title2.Name = "Title1";
+            title2.Text = "Monthly expenditure statistics -- "+DateTime.Now.Year;
+            chart2.Titles.Add(title2);
+            // 
+            // listView1
+            // 
+            listView1.Location = new Point(788, 213);
+            listView1.Name = "listView1";
+            listView1.Size = new Size(771, 705);
+            listView1.TabIndex = 3;
+            listView1.UseCompatibleStateImageBehavior = false;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(817, 23);
+            label2.Name = "label2";
+            label2.Size = new Size(122, 31);
+            label2.TabIndex = 4;
+            label2.Text = "Balance : ";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(1028, 23);
+            label3.Name = "label3";
+            label3.Size = new Size(183, 31);
+            label3.TabIndex = 5;
+            label3.Text = "Total Income : ";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(1267, 23);
+            label4.Name = "label4";
+            label4.Size = new Size(192, 31);
+            label4.TabIndex = 6;
+            label4.Text = "Total Expense : ";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(817, 82);
+            label5.Name = "label5";
+            label5.Size = new Size(83, 31);
+            label5.TabIndex = 7;
+            label5.Text = "$ 1.00";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(1053, 82);
+            label6.Name = "label6";
+            label6.Size = new Size(83, 31);
+            label6.TabIndex = 8;
+            label6.Text = "$ 1.00";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(1308, 82);
+            label7.Name = "label7";
+            label7.Size = new Size(83, 31);
+            label7.TabIndex = 9;
+            label7.Text = "$ 1.00";
+            label7.Click += label7_Click;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(802, 179);
+            label8.Name = "label8";
+            label8.Size = new Size(279, 31);
+            label8.TabIndex = 10;
+            label8.Text = "Recent 20 Transactions";
+            // 
             // UserControlDashboard
             // 
-            AutoScaleDimensions = new SizeF(7F, 17F);
+            AutoScaleDimensions = new SizeF(14F, 31F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(label8);
+            Controls.Add(label7);
+            Controls.Add(label6);
+            Controls.Add(label5);
+            Controls.Add(label4);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(listView1);
+            Controls.Add(chart2);
+            Controls.Add(chart1);
             Controls.Add(label1);
+            Margin = new Padding(6, 5, 6, 5);
             Name = "UserControlDashboard";
-            Size = new Size(669, 432);
+            Size = new Size(1562, 921);
             Load += UserControlDashboard_Load;
+            ((System.ComponentModel.ISupportInitialize)chart1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)chart2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
+        private System.Windows.Forms.ListView listView1;
+
         #endregion
 
         private Label label1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
+        private Label label2;
+        private Label label3;
+        private Label label4;
+        private Label label5;
+        private Label label6;
+        private Label label7;
+        private Label label8;
     }
 }

@@ -34,19 +34,21 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(207, 176);
+            label1.Location = new Point(0, 0);
+            label1.Margin = new Padding(6, 0, 6, 0);
             label1.Name = "label1";
-            label1.Size = new Size(112, 17);
+            label1.Size = new Size(218, 31);
             label1.TabIndex = 0;
             label1.Text = "This is transaction";
             // 
             // UserControlTrans
             // 
-            AutoScaleDimensions = new SizeF(7F, 17F);
+            AutoScaleDimensions = new SizeF(14F, 31F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(label1);
+            Margin = new Padding(6, 5, 6, 5);
             Name = "UserControlTrans";
-            Size = new Size(687, 434);
+            Size = new Size(1562, 921);
             ResumeLayout(false);
             PerformLayout();
         }

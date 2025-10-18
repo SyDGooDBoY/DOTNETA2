@@ -34,19 +34,21 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(153, 165);
+            label1.Location = new Point(306, 301);
+            label1.Margin = new Padding(6, 0, 6, 0);
             label1.Name = "label1";
-            label1.Size = new Size(86, 17);
+            label1.Size = new Size(167, 31);
             label1.TabIndex = 0;
             label1.Text = "This is Advise";
             // 
             // UserControlAdvise
             // 
-            AutoScaleDimensions = new SizeF(7F, 17F);
+            AutoScaleDimensions = new SizeF(14F, 31F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(label1);
+            Margin = new Padding(6, 5, 6, 5);
             Name = "UserControlAdvise";
-            Size = new Size(831, 494);
+            Size = new Size(1562, 921);
             ResumeLayout(false);
             PerformLayout();
         }
