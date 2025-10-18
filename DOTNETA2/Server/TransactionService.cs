@@ -119,11 +119,12 @@ public class TransactionService
     }
 
     //Return the record corresponding to the maximum amount of expenditure/income in the specified category
-    public Transaction GetLargestByTypeAndCategory(Type type, Category category)
+    public List<Transaction> GetTransactionsByCategory(DateTime date,Type type, Category category)
     {
         return dao.GetAll().Where(t => t.Type == type)
             .Where(t => t.Category == category)
-            .OrderByDescending(t => t.Amount)
-            .FirstOrDefault();
+            .Where(t => t.Date.Year == date.Year)
+            .Where(t => t.Date.Month == date.Month)
+            .OrderByDescending(t => t.Amount).ToList();
     }
 }

@@ -28,48 +28,284 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new System.Windows.Forms.Label();
-            panel1 = new System.Windows.Forms.Panel();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            label1 = new Label();
+            panel1 = new Panel();
+            panel2 = new Panel();
+            comboBox2 = new ComboBox();
+            comboBox1 = new ComboBox();
+            label3 = new Label();
+            label2 = new Label();
+            chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            label4 = new Label();
+            label5 = new Label();
+            label6 = new Label();
+            label7 = new Label();
+            label8 = new Label();
+            label9 = new Label();
+            label10 = new Label();
+            label11 = new Label();
+            label12 = new Label();
+            label13 = new Label();
+            label14 = new Label();
             panel1.SuspendLayout();
+            panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)chart1).BeginInit();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            label1.Location = new System.Drawing.Point(105, 98);
-            label1.Margin = new System.Windows.Forms.Padding(12, 0, 12, 0);
+            label1.ForeColor = SystemColors.ButtonHighlight;
+            label1.Location = new Point(76, 46);
+            label1.Margin = new Padding(12, 0, 12, 0);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(476, 62);
+            label1.Size = new Size(296, 31);
             label1.TabIndex = 0;
-            label1.Text = "Welcome to Report";
+            label1.Text = "Monthly Expense Report";
             // 
             // panel1
             // 
-            panel1.BackColor = System.Drawing.SystemColors.HotTrack;
+            panel1.BackColor = SystemColors.HotTrack;
             panel1.Controls.Add(label1);
-            panel1.Location = new System.Drawing.Point(0, 0);
-            panel1.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
+            panel1.Location = new Point(0, 0);
+            panel1.Margin = new Padding(12, 10, 12, 10);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(3236, 212);
+            panel1.Size = new Size(1562, 177);
             panel1.TabIndex = 1;
+            // 
+            // panel2
+            // 
+            panel2.BackColor = SystemColors.ControlDark;
+            panel2.Controls.Add(comboBox2);
+            panel2.Controls.Add(comboBox1);
+            panel2.Controls.Add(label3);
+            panel2.Controls.Add(label2);
+            panel2.Location = new Point(0, 174);
+            panel2.Margin = new Padding(12, 10, 12, 10);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(1562, 135);
+            panel2.TabIndex = 2;
+            // 
+            // comboBox2
+            // 
+            comboBox2.FormattingEnabled = true;
+            comboBox2.Location = new Point(978, 35);
+            comboBox2.Name = "comboBox2";
+            comboBox2.Size = new Size(283, 39);
+            comboBox2.TabIndex = 3;
+            comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
+            // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(302, 38);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(283, 39);
+            comboBox1.TabIndex = 2;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(763, 38);
+            label3.Name = "label3";
+            label3.Size = new Size(104, 31);
+            label3.TabIndex = 1;
+            label3.Text = "Month :";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(126, 38);
+            label2.Name = "label2";
+            label2.Size = new Size(77, 31);
+            label2.TabIndex = 0;
+            label2.Text = "Year :";
+            // 
+            // chart1
+            // 
+            chartArea1.Name = "ChartArea1";
+            chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            chart1.Legends.Add(legend1);
+            chart1.Location = new Point(29, 307);
+            chart1.Name = "chart1";
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            chart1.Series.Add(series1);
+            chart1.Size = new Size(742, 614);
+            chart1.TabIndex = 3;
+            chart1.Text = "chart1";
+            chart1.MouseClick += chart1_MouseClick;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Microsoft YaHei UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 134);
+            label4.Location = new Point(950, 369);
+            label4.Name = "label4";
+            label4.Size = new Size(173, 42);
+            label4.TabIndex = 4;
+            label4.Text = "Category:";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Microsoft YaHei UI", 10.125F, FontStyle.Regular, GraphicsUnit.Point, 134);
+            label5.Location = new Point(1007, 474);
+            label5.Name = "label5";
+            label5.Size = new Size(116, 35);
+            label5.TabIndex = 5;
+            label5.Text = "Largest:";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Microsoft YaHei UI", 10.125F, FontStyle.Regular, GraphicsUnit.Point, 134);
+            label6.Location = new Point(1040, 580);
+            label6.Name = "label6";
+            label6.Size = new Size(83, 35);
+            label6.TabIndex = 6;
+            label6.Text = "Date:";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Microsoft YaHei UI", 10.125F, FontStyle.Regular, GraphicsUnit.Point, 134);
+            label7.Location = new Point(1040, 693);
+            label7.Name = "label7";
+            label7.Size = new Size(86, 35);
+            label7.TabIndex = 7;
+            label7.Text = "Total:";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Microsoft YaHei UI", 10.125F, FontStyle.Regular, GraphicsUnit.Point, 134);
+            label8.Location = new Point(1031, 797);
+            label8.Name = "label8";
+            label8.Size = new Size(95, 35);
+            label8.TabIndex = 8;
+            label8.Text = "Share:";
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Microsoft YaHei UI", 10.125F, FontStyle.Regular, GraphicsUnit.Point, 134);
+            label9.Location = new Point(1208, 797);
+            label9.Name = "label9";
+            label9.Size = new Size(55, 35);
+            label9.TabIndex = 13;
+            label9.Text = "0%";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Microsoft YaHei UI", 10.125F, FontStyle.Regular, GraphicsUnit.Point, 134);
+            label10.Location = new Point(1208, 693);
+            label10.Name = "label10";
+            label10.Size = new Size(105, 35);
+            label10.TabIndex = 12;
+            label10.Text = "A$0.00";
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Microsoft YaHei UI", 10.125F, FontStyle.Regular, GraphicsUnit.Point, 134);
+            label11.Location = new Point(1208, 580);
+            label11.Name = "label11";
+            label11.Size = new Size(44, 35);
+            label11.TabIndex = 11;
+            label11.Text = "—";
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Microsoft YaHei UI", 10.125F, FontStyle.Regular, GraphicsUnit.Point, 134);
+            label12.Location = new Point(1208, 474);
+            label12.Name = "label12";
+            label12.Size = new Size(105, 35);
+            label12.TabIndex = 10;
+            label12.Text = "A$0.00";
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Font = new Font("Microsoft YaHei UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 134);
+            label13.Location = new Point(1208, 369);
+            label13.Name = "label13";
+            label13.Size = new Size(53, 42);
+            label13.TabIndex = 9;
+            label13.Text = "—";
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.BackColor = SystemColors.ButtonHighlight;
+            label14.Font = new Font("Microsoft YaHei UI", 16.125F, FontStyle.Bold, GraphicsUnit.Point, 134);
+            label14.Location = new Point(148, 580);
+            label14.Name = "label14";
+            label14.Size = new Size(405, 57);
+            label14.TabIndex = 14;
+            label14.Text = "No data available";
             // 
             // UserControlReport
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(14F, 31F);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoScaleDimensions = new SizeF(14F, 31F);
+            AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(label14);
+            Controls.Add(label9);
+            Controls.Add(label10);
+            Controls.Add(label11);
+            Controls.Add(label12);
+            Controls.Add(label13);
+            Controls.Add(label8);
+            Controls.Add(label7);
+            Controls.Add(label6);
+            Controls.Add(label5);
+            Controls.Add(label4);
+            Controls.Add(chart1);
+            Controls.Add(panel2);
             Controls.Add(panel1);
-            Font = new System.Drawing.Font("Microsoft YaHei UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)134));
-            Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
-            Size = new System.Drawing.Size(3236, 1842);
+            Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 134);
+            Margin = new Padding(6, 5, 6, 5);
+            Name = "UserControlReport";
+            Size = new Size(1562, 921);
+            Load += UserControlReport_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)chart1).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private Panel panel1;
+        private System.Windows.Forms.Panel panel1;
+        private Panel panel2;
+        private ComboBox comboBox2;
+        private ComboBox comboBox1;
+        private Label label3;
+        private Label label2;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private Label label4;
+        private Label label5;
+        private Label label6;
+        private Label label7;
+        private Label label8;
+        private Label label9;
+        private Label label10;
+        private Label label11;
+        private Label label12;
+        private Label label13;
+        private Label label14;
     }
 }

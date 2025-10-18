@@ -77,14 +77,7 @@ public class TestTransactionController
             TestContext.WriteLine(t.ToString());
         }
     }
-
-
-    [Test]
-    public void Test_GetLargestByTypeAndCategory()
-    {
-        Transaction t = transactionController.GetLargestByTypeAndCategory(Type.Income, Category.Bonus);
-        TestContext.WriteLine(t.ToString());
-    }
+    
 
 
     [Test]

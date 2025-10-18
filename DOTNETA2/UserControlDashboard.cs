@@ -65,6 +65,7 @@ namespace DOTNETA2
         {
             Dictionary<Category, decimal> data = tc.GetRecordByYearAndMonth(DateTime.Now.Year, DateTime.Now.Month, Enum.Type.Expense);
             chart1.Series[0].Points.Clear();
+            chart1.Series[0].Label="#VALX\nAUD #VALY{N2}"; 
             foreach (var d in data)
                 chart1.Series[0].Points.AddXY(d.Key.ToString(), d.Value);
         }

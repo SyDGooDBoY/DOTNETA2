@@ -237,6 +237,7 @@
             // 
             // userControlReport1
             // 
+            userControlReport1.Font = new Font("Microsoft YaHei UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 134);
             userControlReport1.Location = new Point(472, 60);
             userControlReport1.Margin = new Padding(12, 9, 12, 9);
             userControlReport1.Name = "userControlReport1";

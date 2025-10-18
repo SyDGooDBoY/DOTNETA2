@@ -65,6 +65,6 @@ public class TransactionController
     public List<Transaction> GetRecentTransactions(int count) => service.GetRecentTransactions(count);
 
     //Return the record corresponding to the maximum amount of expenditure/income in the specified category
-    public Transaction GetLargestByTypeAndCategory(Type type, Category category) =>
-        service.GetLargestByTypeAndCategory(type, category);
+    public List<Transaction> GetTransactionsByCategory(DateTime date,Type type, Category category) =>
+        service.GetTransactionsByCategory(date,type, category);
 }
