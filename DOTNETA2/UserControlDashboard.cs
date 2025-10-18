@@ -71,6 +71,11 @@ namespace DOTNETA2
             }
             chart1.Series[0].Points.Clear();
             chart1.Series[0].Label="#AXISLABEL\nAUD #VALY{N2}"; 
+            chart1.Series[0].IsValueShownAsLabel = true;
+            chart1.Series[0]["PieLabelStyle"] = "Outside";
+            chart1.Series[0]["PieLineColor"] = "Gray";
+            chart1.Series[0].SmartLabelStyle.Enabled = true;
+            chart1.Series[0].SmartLabelStyle.MaxMovingDistance = 200;
             foreach (var d in data)
                 chart1.Series[0].Points.AddXY(d.Key.ToString(), d.Value);
         }
