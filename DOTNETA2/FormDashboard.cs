@@ -68,6 +68,9 @@ namespace DOTNETA2
 
             //hide other usercontrol
             userControlDashboard1.Hide();
+            userControlAdvise1.Hide();
+            userControlReport1.Hide();
+            userControlBudget1.Hide();
         }
 
         private void button3_Click(object sender, EventArgs e)

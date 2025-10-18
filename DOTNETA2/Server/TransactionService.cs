@@ -12,6 +12,7 @@ public class TransactionService
     //Obtain all transaction records
     public List<Transaction> GetAllTransactions() => dao.GetAll();
 
+    public Transaction? GetOneTransaction(int id) => dao.GetOne(id);
     
     //add a transaction
     public void AddTransaction(Transaction transaction)
@@ -28,6 +29,11 @@ public class TransactionService
     public void DeleteTransaction(int id)
     {
         dao.Delete(id);
+    }
+    
+    public void UpdateTransaction(Transaction transaction)
+    {
+        dao.Update(transaction);
     }
 
     //get total income

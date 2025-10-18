@@ -12,6 +12,8 @@ public class TransactionController
     
     //Display all transaction records
     public List<Transaction> ShowTransactions() => service.GetAllTransactions();
+    
+    public Transaction? ShowOneTransaction(int id) => service.GetOneTransaction(id);
 
     
     //Keep records of income or Expense
@@ -23,6 +25,15 @@ public class TransactionController
     
     //Delete the  record by TransactionID
     public void DeleteTransaction(int id) => service.DeleteTransaction(id);
+    
+    //update the record
+    public void UpdataTransaction(int id,DateTime date,Type type,Category category,decimal amount)
+    {
+        Transaction transaction=new Transaction(date, type, category, amount);
+        transaction.Id = id;
+        service.UpdateTransaction(transaction);
+    }
+    
 
     //Calculate the balance of all expenses and all income
     public decimal GetBalance() => service.GetBalance();

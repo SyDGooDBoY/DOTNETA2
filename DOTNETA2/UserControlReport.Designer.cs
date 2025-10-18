@@ -22,41 +22,46 @@
 
         #region 组件设计器生成的代码
 
-        /// <summary> 
-        /// 设计器支持所需的方法 - 不要修改
-        /// 使用代码编辑器修改此方法的内容。
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
-            panel1 = new Panel();
+            label1 = new System.Windows.Forms.Label();
+            panel1 = new System.Windows.Forms.Panel();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(61, 25);
+            label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            label1.Location = new System.Drawing.Point(105, 98);
+            label1.Margin = new System.Windows.Forms.Padding(12, 0, 12, 0);
             label1.Name = "label1";
-            label1.Size = new Size(88, 17);
+            label1.Size = new System.Drawing.Size(476, 62);
             label1.TabIndex = 0;
-            label1.Text = "This is Report";
+            label1.Text = "Welcome to Report";
             // 
             // panel1
             // 
+            panel1.BackColor = System.Drawing.SystemColors.HotTrack;
             panel1.Controls.Add(label1);
-            panel1.Location = new Point(0, 3);
+            panel1.Location = new System.Drawing.Point(0, 0);
+            panel1.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
             panel1.Name = "panel1";
-            panel1.Size = new Size(781, 66);
+            panel1.Size = new System.Drawing.Size(3236, 212);
             panel1.TabIndex = 1;
             // 
             // UserControlReport
             // 
-            AutoScaleDimensions = new SizeF(7F, 17F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleDimensions = new System.Drawing.SizeF(14F, 31F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             Controls.Add(panel1);
-            Name = "UserControlReport";
-            Size = new Size(781, 505);
+            Font = new System.Drawing.Font("Microsoft YaHei UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)134));
+            Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
+            Size = new System.Drawing.Size(3236, 1842);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);
@@ -64,7 +69,7 @@
 
         #endregion
 
-        private Label label1;
+        private System.Windows.Forms.Label label1;
         private Panel panel1;
     }
 }

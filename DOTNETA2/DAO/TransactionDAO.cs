@@ -1,4 +1,5 @@
 ﻿using DOTNETA2.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace DOTNETA2.DAO;
 
@@ -11,6 +12,11 @@ public class TransactionDAO
         return context.Transactions.OrderByDescending(t => t.Date).ToList();
     }
 
+    public Transaction? GetOne(int id)
+    {
+        return context.Transactions.AsNoTracking().FirstOrDefault(t => t.Id == id);
+    }
+
     public void Add(Transaction transaction)
     {
         context.Transactions.Add(transaction);
@@ -19,7 +25,12 @@ public class TransactionDAO
 
     public void Update(Transaction transaction)
     {
-        context.Transactions.Update(transaction);
+        var entity = context.Transactions.Find(transaction.Id);
+        if (entity == null) return;
+        entity.Date     = transaction.Date;
+        entity.Type     = transaction.Type;
+        entity.Category = transaction.Category;
+        entity.Amount   = transaction.Amount;
         context.SaveChanges();
     }
 
