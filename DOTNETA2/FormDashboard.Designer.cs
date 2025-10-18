@@ -233,7 +233,7 @@
             // 
             userControlReport1.Location = new Point(234, 33);
             userControlReport1.Name = "userControlReport1";
-            userControlReport1.Size = new Size(827, 580);
+            userControlReport1.Size = new Size(920, 580);
             userControlReport1.TabIndex = 9;
             // 
             // FormDashboard

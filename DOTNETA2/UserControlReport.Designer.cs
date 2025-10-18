@@ -36,16 +36,21 @@
             // label1
             // 
             label1.AutoSize = true;
+            label1.Font = new Font("Century Gothic", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.White;
             label1.Location = new Point(61, 25);
             label1.Name = "label1";
-            label1.Size = new Size(88, 17);
+            label1.Size = new Size(212, 24);
             label1.TabIndex = 0;
-            label1.Text = "This is Report";
+            label1.Text = "Welcome to Report";
             // 
             // panel1
             // 
+            panel1.BackColor = Color.FromArgb(0, 71, 160);
             panel1.Controls.Add(label1);
-            panel1.Location = new Point(0, 3);
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new Point(0, 0);
+            panel1.Margin = new Padding(0);
             panel1.Name = "panel1";
             panel1.Size = new Size(781, 66);
             panel1.TabIndex = 1;
