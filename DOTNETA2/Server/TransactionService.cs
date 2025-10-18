@@ -73,8 +73,7 @@ public class TransactionService
         var filtered = dao.GetAll()
             .Where(t => t.Date.Year == year)
             .Where(t => t.Date.Month == month)
-            .Where(t => t.Type == type)
-            .Where(t => t.Category != null);
+            .Where(t => t.Type == type);
         var grouped = filtered.GroupBy(t => t.Category);
         foreach (var group in grouped)
         {

@@ -164,7 +164,6 @@
             label7.Size = new Size(83, 31);
             label7.TabIndex = 9;
             label7.Text = "$ 1.00";
-            label7.Click += label7_Click;
             // 
             // label8
             // 

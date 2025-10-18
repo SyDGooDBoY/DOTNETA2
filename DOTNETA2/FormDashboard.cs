@@ -39,6 +39,7 @@ namespace DOTNETA2
         {
             //show current usercontrol dashboard
             userControlDashboard1.Show();
+            userControlDashboard1.LoadDashBoard();
             userControlDashboard1.BringToFront();
             
             //hide other usercontrol
@@ -104,6 +105,7 @@ namespace DOTNETA2
         {
             //show current usercontrol report
             userControlReport1.Show();
+            userControlReport1.LoadReport();
             userControlReport1.BringToFront();
 
             //hide other usercontrol

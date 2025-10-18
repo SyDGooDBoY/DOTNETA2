@@ -60,12 +60,17 @@ namespace DOTNETA2
                 listView1.Items.Add(item);
             }
         }
-
+        
         private void LoadCategoryChart()
         {
             Dictionary<Category, decimal> data = tc.GetRecordByYearAndMonth(DateTime.Now.Year, DateTime.Now.Month, Enum.Type.Expense);
+
+            foreach (KeyValuePair<Category, decimal> pair in data)
+            {
+                Console.WriteLine("key:" +pair.Key+"  value: "+pair.Value);
+            }
             chart1.Series[0].Points.Clear();
-            chart1.Series[0].Label="#VALX\nAUD #VALY{N2}"; 
+            chart1.Series[0].Label="#AXISLABEL\nAUD #VALY{N2}"; 
             foreach (var d in data)
                 chart1.Series[0].Points.AddXY(d.Key.ToString(), d.Value);
         }
@@ -83,15 +88,15 @@ namespace DOTNETA2
 
         private void UserControlDashboard_Load(object sender, EventArgs e)
         {
-            LoadMonthlyChart(); // 示例数据：柱状图
-            LoadCategoryChart(); // 示例数据：饼状图
-            LoadListView1();
-            LoadDashboardSummary();
+            LoadDashBoard();
         }
 
-        private void label7_Click(object sender, EventArgs e)
+        public void LoadDashBoard()
         {
-
+            LoadMonthlyChart();
+            LoadCategoryChart();
+            LoadListView1();
+            LoadDashboardSummary();
         }
     }
 }

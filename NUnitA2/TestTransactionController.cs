@@ -15,7 +15,7 @@ public class TestTransactionController
     [Test]
     public void Test_AddTransaction()
     {
-        transactionController.AddTransaction(new DateTime(2025, 7, 4, 4, 24, 34), Type.Expense, Category.OtherExpense,
+        transactionController.AddTransaction(new DateTime(2025, 10, 4, 4, 24, 34), Type.Expense, Category.OtherExpense,
             (decimal)110.5);
     }
 
@@ -60,7 +60,7 @@ public class TestTransactionController
     public void Test_GetRecordByYearAndMonth()
     {
         Dictionary<Category, decimal> monthlyExpenses =
-            transactionController.GetRecordByYearAndMonth(2025, 10, Type.Income);
+            transactionController.GetRecordByYearAndMonth(2025, 10, Type.Expense);
         foreach (KeyValuePair<Category, decimal> monthlyExpense in monthlyExpenses)
         {
             TestContext.WriteLine(monthlyExpense.ToString());

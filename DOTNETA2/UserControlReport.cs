@@ -25,6 +25,11 @@ namespace DOTNETA2
 
         private void UserControlReport_Load(object sender, EventArgs e)
         {
+            LoadReport();
+        }
+
+        public void LoadReport()
+        {
             loading = true;
             //year
             List<int> years = tc.GetAvailableYears();
@@ -75,12 +80,19 @@ namespace DOTNETA2
 
         private void UpdateTitle()
         {
+            if (comboBox1.SelectedItem == null)
+                return;
             var year = (int)comboBox1.SelectedItem;
             int month = comboBox2.SelectedIndex + 1; // 1..12
             Console.WriteLine("comboBox2.SelectedIndex:" + comboBox2.SelectedIndex);
             string monthName = CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(month);
             label1.Text = $"Monthly Expense Report — {monthName} {year}";
             LoadCategoryChart();
+            label13.Text   = "—";
+            label12.Text = "—";
+            label11.Text   = "—";
+            label10.Text = "A$0.00";
+            label9.Text = "0%";
         }
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -114,8 +126,7 @@ namespace DOTNETA2
                 typeof(DOTNETA2.Enum.Category),
                 categoryName
             );
-
-            // 1) 该类别的全部记录（按你现有接口命名改一下）
+            
             var list = tc.GetTransactionsByCategory(new DateTime(year,month,1), DOTNETA2.Enum.Type.Expense,  category);
 
             if (list == null || list.Count == 0)

@@ -15,7 +15,7 @@ namespace DOTNETA2
 {
     public partial class UserControlTrans : UserControl
     {
-        private int id;
+        private int id=-1;
         private TransactionController tc = new TransactionController();
         public UserControlTrans()
         {
