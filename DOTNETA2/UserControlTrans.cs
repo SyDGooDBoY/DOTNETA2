@@ -37,15 +37,23 @@ namespace DOTNETA2
         private void LoadDataGridView1()
         {
             //show area
-            dataGridView1.Columns.Insert(0, new DataGridViewTextBoxColumn { Name = "Id", HeaderText = "Id", Visible = false });
-            dataGridView1.Columns.Add("Date", "Date");
-            dataGridView1.Columns.Add("Type", "Type");
-            dataGridView1.Columns.Add("Category", "Category");
-            dataGridView1.Columns.Add("Amount", "Amount");
+            if (dataGridView1.Columns["Amount"] == null)
+            {
+                dataGridView1.Columns.Clear();
+                dataGridView1.Columns.Insert(0, new DataGridViewTextBoxColumn { Name = "Id", HeaderText = "Id", Visible = false });
+                dataGridView1.Columns.Add("Date", "Date");
+                dataGridView1.Columns.Add("Type", "Type");
+                dataGridView1.Columns.Add("Category", "Category");
+                dataGridView1.Columns.Add("Amount", "Amount");
+            }
 
             //Align the amounts to the right and apply currency formatting.
-            dataGridView1.Columns["Amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dataGridView1.Columns["Amount"].DefaultCellStyle.Format = "C";
+            var amountCol = dataGridView1.Columns["Amount"];
+            if (amountCol != null)
+            {
+                amountCol.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                amountCol.DefaultCellStyle.Format = "C";
+            }
             
             //Modification of dataGridView style
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -61,8 +69,12 @@ namespace DOTNETA2
         {
             //Get data from page
             var date = dateTimePicker1.Value;
-            var type = (DOTNETA2.Enum.Type)comboBox1.SelectedItem;
-            var category = (DOTNETA2.Enum.Category)comboBox2.SelectedItem;
+            if (comboBox1.SelectedItem is not DOTNETA2.Enum.Type type ||
+                comboBox2.SelectedItem is not DOTNETA2.Enum.Category category)
+            {
+                MessageBox.Show("Please select a valid Type and Category.");
+                return;
+            }
             var amount = numericUpDown1.Value;
             if (amount <= 0)
             {

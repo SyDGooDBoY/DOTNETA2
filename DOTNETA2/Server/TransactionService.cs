@@ -84,7 +84,7 @@ public class TransactionService
     {
         var result = dao.GetAll()
             .Where(t => t.Type == type)
-            .Where(t => t.Category != null)
+            // .Where(t => t.Category != null)
             .GroupBy(t => t.Category)
             .ToDictionary(t => t.Key, t => t.Sum(t => t.Amount));
         

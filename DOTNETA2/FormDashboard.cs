@@ -20,7 +20,7 @@ namespace DOTNETA2
         }
 
         //load form
-        private void FormDashboard_Load(object sender, EventArgs e)
+        private void FormDashboard_Load(object? sender, EventArgs e)
         {
             //usercontrol hide
             userControlDashboard1.Show();

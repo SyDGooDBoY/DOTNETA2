@@ -18,7 +18,7 @@ namespace DOTNETA2
             this.Load += UserControlAdvise_Load;
         }
 
-        private void UserControlAdvise_Load(object sender, EventArgs e)
+        private void UserControlAdvise_Load(object? sender, EventArgs e)
         {
             LoadFilters();        // same pattern as Report:contentReference[oaicite:3]{index=3}
             RunAnalysis();        // auto-run current month on first load

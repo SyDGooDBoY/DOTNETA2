@@ -18,7 +18,7 @@ namespace DOTNETA2
             this.Load += UserControlBudget_Load;
         }
 
-        private void UserControlBudget_Load(object sender, EventArgs e)
+        private void UserControlBudget_Load(object? sender, EventArgs e)
         {
             LoadBudget();  // expose same pattern as Report.LoadReport():contentReference[oaicite:3]{index=3}
         }
