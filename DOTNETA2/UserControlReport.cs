@@ -56,6 +56,34 @@ namespace DOTNETA2
             loading = false;
             UpdateTitle();
         }
+        
+        //update Report title label
+        private void UpdateTitle()
+        {
+            if (comboBox1.SelectedItem == null)
+            {
+                label13.Text = "—";
+                label12.Text = "—";
+                label11.Text = "—";
+                label10.Text = "A$0.00";
+                label9.Text = "0%";
+                LoadCategoryChart();
+                return;
+            }
+            var year = (int)comboBox1.SelectedItem;
+            int month = comboBox2.SelectedIndex + 1; // 1..12
+            string monthName = CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(month);
+            label1.Text = $"Monthly Expense Report — {monthName} {year}";
+
+            //When the title is updated, reset the category details simultaneously.
+            label13.Text = "—";
+            label12.Text = "—";
+            label11.Text = "—";
+            label10.Text = "A$0.00";
+            label9.Text = "0%";
+            LoadCategoryChart();
+        }
+
 
         private void LoadCategoryChart()
         {
@@ -91,26 +119,10 @@ namespace DOTNETA2
             {
                 chart1.Series[0].Points.AddXY(d.Key.ToString(), d.Value);
             }
+            var top = data.OrderByDescending(d => d.Value).First();
+            UpdateCategoryDetails(top.Key.ToString());
         }
 
-        //update Report title label
-        private void UpdateTitle()
-        {
-            if (comboBox1.SelectedItem == null)
-                return;
-            var year = (int)comboBox1.SelectedItem;
-            int month = comboBox2.SelectedIndex + 1; // 1..12
-            string monthName = CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(month);
-            label1.Text = $"Monthly Expense Report — {monthName} {year}";
-            LoadCategoryChart();
-
-            //When the title is updated, reset the category details simultaneously.
-            label13.Text = "—";
-            label12.Text = "—";
-            label11.Text = "—";
-            label10.Text = "A$0.00";
-            label9.Text = "0%";
-        }
 
         //Monitor the update of the dropdown list
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
