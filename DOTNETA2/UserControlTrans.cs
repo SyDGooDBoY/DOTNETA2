@@ -69,7 +69,7 @@ namespace DOTNETA2
             {
                 //append record
                 tc.AddTransaction(date, type, category, amount);
-                MessageBox.Show("Successful update!");
+                MessageBox.Show("Successful added!");
             }
             else
             {
@@ -77,7 +77,7 @@ namespace DOTNETA2
                 tc.UpdataTransaction(id, date, type, category, amount);
                 id = -1;
                 button1.Text = "Save";
-                MessageBox.Show("Successfully added!");
+                MessageBox.Show("Successfully update!");
             }
             Reset();
             LoadAllTransactions();

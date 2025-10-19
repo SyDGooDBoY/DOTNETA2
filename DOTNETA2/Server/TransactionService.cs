@@ -68,17 +68,12 @@ public class TransactionService
     //Return the transaction record by category for the specified month and year
     public Dictionary<Category, decimal> GetRecordByYearAndMonth(int year ,int month,Type type)
     {
-        Dictionary<Category, decimal> result = new Dictionary<Category, decimal>();
-        
-        var filtered = dao.GetAll()
+        Dictionary<Category, decimal> result = dao.GetAll()
             .Where(t => t.Date.Year == year)
             .Where(t => t.Date.Month == month)
-            .Where(t => t.Type == type);
-        var grouped = filtered.GroupBy(t => t.Category);
-        foreach (var group in grouped)
-        {
-            result[group.Key] = group.Sum(t => t.Amount);
-        }
+            .Where(t => t.Type == type)
+            .GroupBy(t => t.Category)
+            .ToDictionary(t => t.Key, t => t.Sum(t => t.Amount));
         return result;
     }
     

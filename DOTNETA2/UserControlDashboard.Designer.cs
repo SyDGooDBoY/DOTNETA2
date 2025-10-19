@@ -1,4 +1,6 @@
-﻿namespace DOTNETA2
+﻿using System.Globalization;
+
+namespace DOTNETA2
 {
     partial class UserControlDashboard
     {
@@ -79,7 +81,7 @@
             chart1.TabIndex = 1;
             chart1.Text = "chart1";
             title1.Name = "Title1";
-            title1.Text = "Details of expenditure classification -- October";
+            title1.Text = "Details of expenditure classification -- "+DateTime.Now.Year+" "+CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(DateTime.Now.Month);
             chart1.Titles.Add(title1);
             // 
             // chart2

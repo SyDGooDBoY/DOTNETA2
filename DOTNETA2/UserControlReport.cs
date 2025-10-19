@@ -47,7 +47,6 @@ namespace DOTNETA2
                 comboBox2.Items.Add(CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(m));
             }
             comboBox2.SelectedItem = CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(DateTime.Now.Month);
-            Console.WriteLine("DateTime.Now.Month:" + DateTime.Now.Month);
             loading = false;
             UpdateTitle();
 
@@ -65,7 +64,7 @@ namespace DOTNETA2
                 label14.Visible = true;
             }
             chart1.Series[0].Points.Clear();
-            chart1.Series[0].Label = "#VALX";
+            chart1.Series[0].Label = "#AXISLABEL";
             chart1.Series[0].IsValueShownAsLabel = true;
             chart1.Series[0]["PieLabelStyle"] = "Outside";
             chart1.Series[0]["PieLineColor"] = "Gray";
@@ -84,7 +83,6 @@ namespace DOTNETA2
                 return;
             var year = (int)comboBox1.SelectedItem;
             int month = comboBox2.SelectedIndex + 1; // 1..12
-            Console.WriteLine("comboBox2.SelectedIndex:" + comboBox2.SelectedIndex);
             string monthName = CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(month);
             label1.Text = $"Monthly Expense Report — {monthName} {year}";
             LoadCategoryChart();

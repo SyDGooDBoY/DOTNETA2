@@ -24,18 +24,6 @@ namespace DOTNETA2
             InitializeComponent();
         }
 
-        private void LoadMonthlyChart()
-        {
-            var data = tc.GetMonthlyRecords(DateTime.Now.Year, Enum.Type.Expense);
-            chart2.Series[0].Points.Clear();
-            for (int i = 0; i < data.Count; i++)
-            {
-                chart2.Series[0].Points.AddXY(i + 1, data[i]);
-            }
-            chart2.ChartAreas[0].AxisX.Title = "Month";
-            chart2.ChartAreas[0].AxisY.Title = "Expense";
-        }
-
         private void LoadListView1()
         {
             listView1.View = View.Details;
@@ -64,11 +52,26 @@ namespace DOTNETA2
         private void LoadCategoryChart()
         {
             Dictionary<Category, decimal> data = tc.GetRecordByYearAndMonth(DateTime.Now.Year, DateTime.Now.Month, Enum.Type.Expense);
-
-            foreach (KeyValuePair<Category, decimal> pair in data)
+            foreach (var d in data)
             {
-                Console.WriteLine("key:" +pair.Key+"  value: "+pair.Value);
+                Console.WriteLine("key:" + d.Key + "  value:" + d.Value);
             }
+            decimal total = data.Values.Sum();
+            var groupedData = new Dictionary<string, decimal>();
+            decimal othersTotal = 0;
+            foreach (var kv in data)
+            {
+                decimal percent = total == 0 ? 0 : (kv.Value / total * 100);
+                if (percent < 5)
+                {
+                    othersTotal += kv.Value;
+                }
+                else
+                {
+                    groupedData[kv.Key.ToString()] = kv.Value;
+                }
+            }
+            if (othersTotal > 0) groupedData["Others"] = othersTotal;
             chart1.Series[0].Points.Clear();
             chart1.Series[0].Label="#AXISLABEL\nAUD #VALY{N2}"; 
             chart1.Series[0].IsValueShownAsLabel = true;
@@ -76,8 +79,23 @@ namespace DOTNETA2
             chart1.Series[0]["PieLineColor"] = "Gray";
             chart1.Series[0].SmartLabelStyle.Enabled = true;
             chart1.Series[0].SmartLabelStyle.MaxMovingDistance = 200;
-            foreach (var d in data)
-                chart1.Series[0].Points.AddXY(d.Key.ToString(), d.Value);
+            foreach (var d in groupedData)
+            {
+                Console.WriteLine("key:" + d.Key + "  value:" + d.Value);
+                chart1.Series[0].Points.AddXY(d.Key, d.Value);
+            }
+        }
+        
+        private void LoadMonthlyChart()
+        {
+            var data = tc.GetMonthlyRecords(DateTime.Now.Year, Enum.Type.Expense);
+            chart2.Series[0].Points.Clear();
+            for (int i = 0; i < data.Count; i++)
+            {
+                chart2.Series[0].Points.AddXY(i + 1, data[i]);
+            }
+            chart2.ChartAreas[0].AxisX.Title = "Month";
+            chart2.ChartAreas[0].AxisY.Title = "Expense";
         }
 
         private void LoadDashboardSummary()

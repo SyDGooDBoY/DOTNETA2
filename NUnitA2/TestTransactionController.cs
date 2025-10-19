@@ -60,7 +60,7 @@ public class TestTransactionController
     public void Test_GetRecordByYearAndMonth()
     {
         Dictionary<Category, decimal> monthlyExpenses =
-            transactionController.GetRecordByYearAndMonth(2025, 10, Type.Expense);
+            transactionController.GetRecordByYearAndMonth(2025, 8, Type.Expense);
         foreach (KeyValuePair<Category, decimal> monthlyExpense in monthlyExpenses)
         {
             TestContext.WriteLine(monthlyExpense.ToString());
