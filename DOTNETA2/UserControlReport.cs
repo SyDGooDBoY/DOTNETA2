@@ -17,6 +17,7 @@ namespace DOTNETA2
     public partial class UserControlReport : UserControl
     {
         private TransactionController tc = new TransactionController();
+        //Check if the loading marker has been loaded
         private bool loading = false;
         public UserControlReport()
         {
@@ -31,7 +32,7 @@ namespace DOTNETA2
         public void LoadReport()
         {
             loading = true;
-            //year
+            //Fill in the years with data into the drop-down box.
             List<int> years = tc.GetAvailableYears();
             comboBox1.Items.Clear();
             foreach (int year in years)
@@ -40,8 +41,9 @@ namespace DOTNETA2
             }
             comboBox1.SelectedItem = DateTime.Now.Year;
 
-            //month
-            comboBox2.Items.Clear();            // 假设 comboBox2 = Month
+            
+            //Fill in the English month into the drop-down box
+            comboBox2.Items.Clear();
             for (int m = 1; m <= 12; m++)
             {
                 comboBox2.Items.Add(CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(m));
@@ -49,12 +51,12 @@ namespace DOTNETA2
             comboBox2.SelectedItem = CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(DateTime.Now.Month);
             loading = false;
             UpdateTitle();
-
         }
 
         private void LoadCategoryChart()
         {
             Dictionary<Category, decimal> data = tc.GetRecordByYearAndMonth((int)comboBox1.SelectedItem, comboBox2.SelectedIndex + 1, Enum.Type.Expense);
+            //When there is no valid data, display the hint label.
             if (data.Count>0)
             {
                 label14.Visible = false;
@@ -63,13 +65,16 @@ namespace DOTNETA2
             {
                 label14.Visible = true;
             }
+            
             chart1.Series[0].Points.Clear();
+            //label style
             chart1.Series[0].Label = "#AXISLABEL";
             chart1.Series[0].IsValueShownAsLabel = true;
             chart1.Series[0]["PieLabelStyle"] = "Outside";
             chart1.Series[0]["PieLineColor"] = "Gray";
             chart1.Series[0].SmartLabelStyle.Enabled = true;
             chart1.Series[0].SmartLabelStyle.MaxMovingDistance = 200;
+            //fill into data
             foreach (var d in data)
             {
                 chart1.Series[0].Points.AddXY(d.Key.ToString(), d.Value);
@@ -77,6 +82,7 @@ namespace DOTNETA2
 
         }
 
+        //update Report title label
         private void UpdateTitle()
         {
             if (comboBox1.SelectedItem == null)
@@ -86,38 +92,42 @@ namespace DOTNETA2
             string monthName = CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(month);
             label1.Text = $"Monthly Expense Report — {monthName} {year}";
             LoadCategoryChart();
+            
+            //When the title is updated, reset the category details simultaneously.
             label13.Text   = "—";
             label12.Text = "—";
             label11.Text   = "—";
             label10.Text = "A$0.00";
             label9.Text = "0%";
         }
+        //Monitor the update of the dropdown list
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (loading) return;
             UpdateTitle();
         }
 
+        //Monitor the update of the dropdown list
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (loading) return;
             UpdateTitle();
         }
 
+        //Implement the click function for the pie chart
         private void chart1_MouseClick(object sender, MouseEventArgs e)
         {
             var hit = chart1.HitTest(e.X, e.Y);
             if (hit.ChartElementType != ChartElementType.DataPoint || hit.PointIndex < 0) return;
-
             var pt = chart1.Series[0].Points[hit.PointIndex];
             string categoryName = pt.AxisLabel;
-
-            ShowDrilldown(categoryName);
+            UpdateCategoryDetails(categoryName);
         }
         
-        private void ShowDrilldown(string categoryName)
+        //Update category details
+        private void UpdateCategoryDetails(string categoryName)
         {
-            // 年月取自筛选
+            //Read the year and month from the page
             int year = (int)comboBox1.SelectedItem;
             int month = comboBox2.SelectedIndex + 1;
             var category = (DOTNETA2.Enum.Category)System.Enum.Parse(
@@ -127,6 +137,7 @@ namespace DOTNETA2
             
             var list = tc.GetTransactionsByCategory(new DateTime(year,month,1), DOTNETA2.Enum.Type.Expense,  category);
 
+            //Initialization display when no valid data is available
             if (list == null || list.Count == 0)
             {
                 label13.Text   = categoryName;
@@ -137,16 +148,16 @@ namespace DOTNETA2
                 return;
             }
 
-            // 2) 最大单笔 + 总额 + 占比
+            //Maximum single transaction + Total amount + Proportion
             var largest = list.OrderByDescending(t => t.Amount).First();
             decimal totalInCat = list.Sum(t => t.Amount);
 
-            // 本月总额（已在 LoadReport 里算过，如果你那里有 total，可缓存；这里再取一次也行）
+            // The total amount for this month
             var all = tc.GetRecordByYearAndMonth(year, month, DOTNETA2.Enum.Type.Expense);
             decimal monthTotal = all.Values.Sum();
             decimal share = monthTotal > 0 ? totalInCat / monthTotal : 0;
 
-            // 3) 更新 UI
+            // 3) Update UI
             label13.Text   = categoryName;
             label12.Text = $"A${largest.Amount:N2}";
             label11.Text   = $"{largest.Date:yyyy-MM-dd}";

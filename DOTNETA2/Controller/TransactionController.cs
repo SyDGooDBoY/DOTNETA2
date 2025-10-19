@@ -13,6 +13,7 @@ public class TransactionController
     //Display all transaction records
     public List<Transaction> ShowTransactions() => service.GetAllTransactions();
     
+    //Return a single Transaction record by ID.
     public Transaction? ShowOneTransaction(int id) => service.GetOneTransaction(id);
 
     
@@ -33,7 +34,6 @@ public class TransactionController
         transaction.Id = id;
         service.UpdateTransaction(transaction);
     }
-    
 
     //Calculate the balance of all expenses and all income
     public decimal GetBalance() => service.GetBalance();
@@ -56,12 +56,12 @@ public class TransactionController
     
     //Return the transaction record by category
     public Dictionary<Category, decimal> GetRecordByType(Type type) =>
-        service.GetRecordByType(type);
+        service.GetRecordByYearAndMonth(type);
 
     //Return to the year with available data
     public List<int> GetAvailableYears() => service.GetAvailableYears();
 
-    //
+    //Return the records with count
     public List<Transaction> GetRecentTransactions(int count) => service.GetRecentTransactions(count);
 
     //Return the record corresponding to the maximum amount of expenditure/income in the specified category

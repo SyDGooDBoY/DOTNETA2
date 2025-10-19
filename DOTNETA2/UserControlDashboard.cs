@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Windows.Forms.DataVisualization.Charting;
+﻿using System.Globalization;
 using DOTNETA2.Controller;
 using DOTNETA2.Entity;
 using DOTNETA2.Enum;
@@ -23,22 +13,24 @@ namespace DOTNETA2
         {
             InitializeComponent();
         }
-
+        
+        //Load the latest 20 records.
         private void LoadListView1()
         {
             listView1.View = View.Details;
             listView1.FullRowSelect = true;
             listView1.GridLines = true;
 
-            // 添加列头
+            //Add table headers
             listView1.Columns.Clear();
             listView1.Columns.Add("Date", 280);
             listView1.Columns.Add("Type", 130);
             listView1.Columns.Add("Category", 150);
             listView1.Columns.Add("Amount", 220);
 
+            //Fill in the data
             listView1.Items.Clear();
-            var au = new CultureInfo("en-AU");
+            var au = new CultureInfo("en-AU");//Time zone changed to Australia
             foreach (Transaction t in tc.GetRecentTransactions(20))
             {
                 var item = new ListViewItem($"{t.Date:yyyy-MM-dd HH:mm:ss}");
@@ -49,19 +41,20 @@ namespace DOTNETA2
             }
         }
         
+        //Load pie chart
         private void LoadCategoryChart()
         {
+            //Get data
             Dictionary<Category, decimal> data = tc.GetRecordByYearAndMonth(DateTime.Now.Year, DateTime.Now.Month, Enum.Type.Expense);
-            foreach (var d in data)
-            {
-                Console.WriteLine("key:" + d.Key + "  value:" + d.Value);
-            }
+            //Calculate the total amount
             decimal total = data.Values.Sum();
             var groupedData = new Dictionary<string, decimal>();
             decimal othersTotal = 0;
+            
+            //Process the data. If the proportion is less than 5%, it will be classified as "other".
             foreach (var kv in data)
             {
-                decimal percent = total == 0 ? 0 : (kv.Value / total * 100);
+                decimal percent = total == 0 ? 0 : kv.Value / total * 100;
                 if (percent < 5)
                 {
                     othersTotal += kv.Value;
@@ -79,15 +72,18 @@ namespace DOTNETA2
             chart1.Series[0]["PieLineColor"] = "Gray";
             chart1.Series[0].SmartLabelStyle.Enabled = true;
             chart1.Series[0].SmartLabelStyle.MaxMovingDistance = 200;
+            
+            //Fill the processed data into the pie chart.
             foreach (var d in groupedData)
             {
-                Console.WriteLine("key:" + d.Key + "  value:" + d.Value);
                 chart1.Series[0].Points.AddXY(d.Key, d.Value);
             }
         }
         
+        //Obtain the data and fill it into the bar chart
         private void LoadMonthlyChart()
         {
+            //Get data and fill in 
             var data = tc.GetMonthlyRecords(DateTime.Now.Year, Enum.Type.Expense);
             chart2.Series[0].Points.Clear();
             for (int i = 0; i < data.Count; i++)
@@ -97,7 +93,8 @@ namespace DOTNETA2
             chart2.ChartAreas[0].AxisX.Title = "Month";
             chart2.ChartAreas[0].AxisY.Title = "Expense";
         }
-
+         
+        //Dynamically modify the content of the summary label
         private void LoadDashboardSummary()
         {
             decimal balance = tc.GetBalance();
@@ -114,12 +111,13 @@ namespace DOTNETA2
             LoadDashBoard();
         }
 
+        //The methods that need to be called during page loading
         public void LoadDashBoard()
         {
-            LoadMonthlyChart();
-            LoadCategoryChart();
-            LoadListView1();
-            LoadDashboardSummary();
+            LoadMonthlyChart();//load bar chart
+            LoadCategoryChart();//load pie chart
+            LoadListView1();//last 20 records
+            LoadDashboardSummary();//Update summary content
         }
     }
 }

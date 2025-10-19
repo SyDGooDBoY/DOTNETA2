@@ -15,7 +15,7 @@ namespace DOTNETA2
 {
     public partial class UserControlTrans : UserControl
     {
-        private int id=-1;
+        private int id=-1;//The id of the transaction that needs to be modified
         private TransactionController tc = new TransactionController();
         public UserControlTrans()
         {
@@ -43,10 +43,11 @@ namespace DOTNETA2
             dataGridView1.Columns.Add("Category", "Category");
             dataGridView1.Columns.Add("Amount", "Amount");
 
-            // 让金额列右对齐、带货币格式
+            //Align the amounts to the right and apply currency formatting.
             dataGridView1.Columns["Amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dataGridView1.Columns["Amount"].DefaultCellStyle.Format = "C";
-
+            
+            //Modification of dataGridView style
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.ReadOnly = true;
@@ -54,8 +55,11 @@ namespace DOTNETA2
             dataGridView1.RowHeadersVisible = false;
         }
 
+        
+        //Save button 
         private void button1_Click(object sender, EventArgs e)
         {
+            //Get data from page
             var date = dateTimePicker1.Value;
             var type = (DOTNETA2.Enum.Type)comboBox1.SelectedItem;
             var category = (DOTNETA2.Enum.Category)comboBox2.SelectedItem;
@@ -65,9 +69,11 @@ namespace DOTNETA2
                 MessageBox.Show("Amount must be greater than 0.");
                 return;
             }
+            
+            //Determine whether it is a new addition or an update.
             if (id <0)
             {
-                //append record
+                //new addition
                 tc.AddTransaction(date, type, category, amount);
                 MessageBox.Show("Successful added!");
             }
@@ -79,15 +85,17 @@ namespace DOTNETA2
                 button1.Text = "Save";
                 MessageBox.Show("Successfully update!");
             }
-            Reset();
+            Reset();//Reset page
             LoadAllTransactions();
         }
 
+        //Reset button
         private void button2_Click(object sender, EventArgs e)
         {
             Reset();
         }
 
+        //Reset page content
         private void Reset()
         {
             dateTimePicker1.Value = DateTime.Today;
@@ -98,11 +106,13 @@ namespace DOTNETA2
             id = -1;
         }
 
+        //Load data into the DataGridView
         private void LoadAllTransactions()
         {
-            dataGridView1.Rows.Clear(); // 清空旧数据
-            var list = tc.ShowTransactions(); // 从数据库取所有记录
+            dataGridView1.Rows.Clear(); //Clear old data
+            var list = tc.ShowTransactions(); // Get data from database
             var au = new CultureInfo("en-AU");
+            //Fill in the data
             foreach (var t in list)
             {
                 dataGridView1.Rows.Add(
@@ -115,6 +125,7 @@ namespace DOTNETA2
             }
         }
 
+        //Delete button
         private void button4_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count == 0)
@@ -133,6 +144,7 @@ namespace DOTNETA2
             LoadAllTransactions();
         }
 
+        //Edit button
         private void button3_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count == 0)
@@ -141,14 +153,15 @@ namespace DOTNETA2
                 return;
             }
             var r = dataGridView1.SelectedRows[0];
-            id = Convert.ToInt32(r.Cells["Id"].Value);
+            id = Convert.ToInt32(r.Cells["Id"].Value);//Obtain the id of the selected record
             Transaction? transaction = tc.ShowOneTransaction(id);
             if (transaction==null)
             {
                 MessageBox.Show("The selected record is invalid.");
                 return;
             }
-
+            
+            //Write the data back to the editing area
             dateTimePicker1.Value = transaction.Date;
             comboBox1.SelectedItem = System.Enum.Parse<DOTNETA2.Enum.Type>(transaction.Type.ToString());
             comboBox2.SelectedItem=System.Enum.Parse<DOTNETA2.Enum.Category>(transaction.Category.ToString());

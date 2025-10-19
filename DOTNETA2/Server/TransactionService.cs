@@ -9,9 +9,10 @@ public class TransactionService
 {
     private TransactionDAO dao =new TransactionDAO();
     
-    //Obtain all transaction records
+    //Return all transaction records
     public List<Transaction> GetAllTransactions() => dao.GetAll();
 
+    //Return a single Transaction record by ID.
     public Transaction? GetOneTransaction(int id) => dao.GetOne(id);
     
     //add a transaction
@@ -31,6 +32,7 @@ public class TransactionService
         dao.Delete(id);
     }
     
+    //update transaction record
     public void UpdateTransaction(Transaction transaction)
     {
         dao.Update(transaction);
@@ -78,21 +80,18 @@ public class TransactionService
     }
     
     //Return the transaction record by category
-    public Dictionary<Category, decimal> GetRecordByType(Type type)
+    public Dictionary<Category, decimal> GetRecordByYearAndMonth(Type type)
     {
-        Dictionary<Category, decimal> result = new Dictionary<Category, decimal>();
-        
-        var filtered = dao.GetAll()
+        var result = dao.GetAll()
             .Where(t => t.Type == type)
-            .Where(t => t.Category != null);
-        var grouped = filtered.GroupBy(t => t.Category);
-        foreach (var group in grouped)
-        {
-            result[group.Key] = group.Sum(t => t.Amount);
-        }
+            .Where(t => t.Category != null)
+            .GroupBy(t => t.Category)
+            .ToDictionary(t => t.Key, t => t.Sum(t => t.Amount));
+        
         return result;
     }
     
+    //Return years with available data
     public List<int> GetAvailableYears()
     {
         List<Transaction> transactions = dao.GetAll();
@@ -105,6 +104,7 @@ public class TransactionService
         return years;
     }
 
+    //Return the records with count
     public List<Transaction> GetRecentTransactions(int count)
     {
         return dao.GetAll().OrderByDescending(t => t.Date)

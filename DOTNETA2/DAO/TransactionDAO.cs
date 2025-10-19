@@ -7,22 +7,26 @@ public class TransactionDAO
 {
     private TransactionContext context =new TransactionContext();
     
+    //Return all transaction records
     public List<Transaction> GetAll()
     {
         return context.Transactions.OrderByDescending(t => t.Date).ToList();
     }
 
+    //Return one transaction by id
     public Transaction? GetOne(int id)
     {
         return context.Transactions.AsNoTracking().FirstOrDefault(t => t.Id == id);
     }
 
+    //Add a transaction
     public void Add(Transaction transaction)
     {
         context.Transactions.Add(transaction);
         context.SaveChanges();
     }
 
+    //update the record
     public void Update(Transaction transaction)
     {
         var entity = context.Transactions.Find(transaction.Id);
@@ -34,6 +38,7 @@ public class TransactionDAO
         context.SaveChanges();
     }
 
+    //Delete a transaction by id
     public void Delete(int id)
     {
         var t = context.Transactions.Find(id);
@@ -43,5 +48,4 @@ public class TransactionDAO
             context.SaveChanges();
         }
     }
-    
 }
