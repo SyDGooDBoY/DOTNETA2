@@ -30,29 +30,29 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDashboard));
-            panel1 = new System.Windows.Forms.Panel();
-            button5 = new System.Windows.Forms.Button();
-            button4 = new System.Windows.Forms.Button();
-            button3 = new System.Windows.Forms.Button();
-            button2 = new System.Windows.Forms.Button();
-            button1 = new System.Windows.Forms.Button();
-            pictureBox1 = new System.Windows.Forms.PictureBox();
-            panel2 = new System.Windows.Forms.Panel();
-            label2 = new System.Windows.Forms.Label();
-            labelTime = new System.Windows.Forms.Label();
+            panel1 = new Panel();
+            button5 = new Button();
+            button4 = new Button();
+            button3 = new Button();
+            button2 = new Button();
+            button1 = new Button();
+            pictureBox1 = new PictureBox();
+            panel2 = new Panel();
+            label2 = new Label();
+            labelTime = new Label();
             timerTime = new System.Windows.Forms.Timer(components);
-            userControlDashboard1 = new DOTNETA2.UserControlDashboard();
-            userControlTrans1 = new DOTNETA2.UserControlTrans();
-            userControlAdvise1 = new DOTNETA2.UserControlAdvise();
-            userControlBudget1 = new DOTNETA2.UserControlBudget();
-            userControlReport1 = new DOTNETA2.UserControlReport();
+            userControlDashboard1 = new UserControlDashboard();
+            userControlTrans1 = new UserControlTrans();
+            userControlAdvise1 = new UserControlAdvise();
+            userControlBudget1 = new UserControlBudget();
+            userControlReport1 = new UserControlReport();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
-            panel1.BackColor = System.Drawing.Color.FromArgb(((int)((byte)0)), ((int)((byte)71)), ((int)((byte)160)));
+            panel1.BackColor = Color.FromArgb(0, 71, 160);
             panel1.Controls.Add(button5);
             panel1.Controls.Add(button4);
             panel1.Controls.Add(button3);
@@ -60,25 +60,25 @@
             panel1.Controls.Add(button1);
             panel1.Controls.Add(pictureBox1);
             panel1.Controls.Add(panel2);
-            panel1.Location = new System.Drawing.Point(-8, -29);
-            panel1.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            panel1.Dock = DockStyle.Left;
+            panel1.Location = new Point(0, 0);
+            panel1.Margin = new Padding(0);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(476, 1160);
+            panel1.Size = new Size(238, 614);
             panel1.TabIndex = 0;
             // 
             // button5
             // 
             button5.FlatAppearance.BorderSize = 0;
-            button5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)((byte)224)), ((int)((byte)224)), ((int)((byte)224)));
-            button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            button5.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold);
-            button5.ForeColor = System.Drawing.Color.White;
-            button5.Image = ((System.Drawing.Image)resources.GetObject("button5.Image"));
-            button5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            button5.Location = new System.Drawing.Point(4, 956);
-            button5.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            button5.FlatAppearance.MouseOverBackColor = Color.FromArgb(224, 224, 224);
+            button5.FlatStyle = FlatStyle.Flat;
+            button5.Font = new Font("Century Gothic", 14.25F, FontStyle.Bold);
+            button5.ForeColor = Color.White;
+            button5.Image = (Image)resources.GetObject("button5.Image");
+            button5.ImageAlign = ContentAlignment.MiddleLeft;
+            button5.Location = new Point(2, 524);
             button5.Name = "button5";
-            button5.Size = new System.Drawing.Size(482, 164);
+            button5.Size = new Size(241, 90);
             button5.TabIndex = 7;
             button5.Text = "Report";
             button5.UseVisualStyleBackColor = true;
@@ -87,16 +87,15 @@
             // button4
             // 
             button4.FlatAppearance.BorderSize = 0;
-            button4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)((byte)224)), ((int)((byte)224)), ((int)((byte)224)));
-            button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            button4.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold);
-            button4.ForeColor = System.Drawing.Color.White;
-            button4.Image = ((System.Drawing.Image)resources.GetObject("button4.Image"));
-            button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            button4.Location = new System.Drawing.Point(6, 775);
-            button4.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            button4.FlatAppearance.MouseOverBackColor = Color.FromArgb(224, 224, 224);
+            button4.FlatStyle = FlatStyle.Flat;
+            button4.Font = new Font("Century Gothic", 14.25F, FontStyle.Bold);
+            button4.ForeColor = Color.White;
+            button4.Image = (Image)resources.GetObject("button4.Image");
+            button4.ImageAlign = ContentAlignment.MiddleLeft;
+            button4.Location = new Point(3, 425);
             button4.Name = "button4";
-            button4.Size = new System.Drawing.Size(482, 188);
+            button4.Size = new Size(241, 103);
             button4.TabIndex = 6;
             button4.Text = "Budget";
             button4.UseVisualStyleBackColor = true;
@@ -105,16 +104,15 @@
             // button3
             // 
             button3.FlatAppearance.BorderSize = 0;
-            button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)((byte)224)), ((int)((byte)224)), ((int)((byte)224)));
-            button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            button3.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold);
-            button3.ForeColor = System.Drawing.Color.White;
-            button3.Image = ((System.Drawing.Image)resources.GetObject("button3.Image"));
-            button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            button3.Location = new System.Drawing.Point(6, 605);
-            button3.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            button3.FlatAppearance.MouseOverBackColor = Color.FromArgb(224, 224, 224);
+            button3.FlatStyle = FlatStyle.Flat;
+            button3.Font = new Font("Century Gothic", 14.25F, FontStyle.Bold);
+            button3.ForeColor = Color.White;
+            button3.Image = (Image)resources.GetObject("button3.Image");
+            button3.ImageAlign = ContentAlignment.MiddleLeft;
+            button3.Location = new Point(3, 332);
             button3.Name = "button3";
-            button3.Size = new System.Drawing.Size(482, 171);
+            button3.Size = new Size(241, 94);
             button3.TabIndex = 5;
             button3.Text = "Advise";
             button3.UseVisualStyleBackColor = true;
@@ -123,16 +121,15 @@
             // button2
             // 
             button2.FlatAppearance.BorderSize = 0;
-            button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)((byte)224)), ((int)((byte)224)), ((int)((byte)224)));
-            button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            button2.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold);
-            button2.ForeColor = System.Drawing.Color.White;
-            button2.Image = ((System.Drawing.Image)resources.GetObject("button2.Image"));
-            button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            button2.Location = new System.Drawing.Point(4, 450);
-            button2.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            button2.FlatAppearance.MouseOverBackColor = Color.FromArgb(224, 224, 224);
+            button2.FlatStyle = FlatStyle.Flat;
+            button2.Font = new Font("Century Gothic", 14.25F, FontStyle.Bold);
+            button2.ForeColor = Color.White;
+            button2.Image = (Image)resources.GetObject("button2.Image");
+            button2.ImageAlign = ContentAlignment.MiddleLeft;
+            button2.Location = new Point(2, 247);
             button2.Name = "button2";
-            button2.Size = new System.Drawing.Size(484, 170);
+            button2.Size = new Size(242, 93);
             button2.TabIndex = 4;
             button2.Text = "Transaction";
             button2.UseVisualStyleBackColor = true;
@@ -140,19 +137,18 @@
             // 
             // button1
             // 
-            button1.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            button1.FlatAppearance.BorderColor = Color.White;
             button1.FlatAppearance.BorderSize = 0;
-            button1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ActiveCaption;
-            button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
-            button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            button1.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)0));
-            button1.ForeColor = System.Drawing.Color.White;
-            button1.Image = ((System.Drawing.Image)resources.GetObject("button1.Image"));
-            button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            button1.Location = new System.Drawing.Point(6, 284);
-            button1.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            button1.FlatAppearance.MouseDownBackColor = SystemColors.ActiveCaption;
+            button1.FlatAppearance.MouseOverBackColor = Color.Silver;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("Century Gothic", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button1.ForeColor = Color.White;
+            button1.Image = (Image)resources.GetObject("button1.Image");
+            button1.ImageAlign = ContentAlignment.MiddleLeft;
+            button1.Location = new Point(3, 156);
             button1.Name = "button1";
-            button1.Size = new System.Drawing.Size(482, 186);
+            button1.Size = new Size(241, 102);
             button1.TabIndex = 3;
             button1.Text = "Dashboard";
             button1.UseVisualStyleBackColor = true;
@@ -160,42 +156,38 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.Image = ((System.Drawing.Image)resources.GetObject("pictureBox1.Image"));
-            pictureBox1.Location = new System.Drawing.Point(138, 103);
-            pictureBox1.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(57, 26);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new System.Drawing.Size(262, 255);
+            pictureBox1.Size = new Size(131, 140);
             pictureBox1.TabIndex = 2;
             pictureBox1.TabStop = false;
             // 
             // panel2
             // 
-            panel2.Location = new System.Drawing.Point(480, 5);
-            panel2.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            panel2.Location = new Point(240, 3);
             panel2.Name = "panel2";
-            panel2.Size = new System.Drawing.Size(1548, 106);
+            panel2.Size = new Size(774, 58);
             panel2.TabIndex = 1;
             panel2.Paint += panel2_Paint;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new System.Drawing.Font("Century Gothic", 17.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)0));
-            label2.ForeColor = System.Drawing.Color.FromArgb(((int)((byte)0)), ((int)((byte)71)), ((int)((byte)160)));
-            label2.Location = new System.Drawing.Point(500, 4);
-            label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            label2.Font = new Font("Century Gothic", 17.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.ForeColor = Color.FromArgb(0, 71, 160);
+            label2.Location = new Point(250, 2);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(531, 55);
+            label2.Size = new Size(266, 27);
             label2.TabIndex = 2;
             label2.Text = "Daily Expenses Tracker";
             // 
             // labelTime
             // 
             labelTime.AutoSize = true;
-            labelTime.Location = new System.Drawing.Point(1930, 20);
-            labelTime.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            labelTime.Location = new Point(965, 11);
             labelTime.Name = "labelTime";
-            labelTime.Size = new System.Drawing.Size(138, 31);
+            labelTime.Size = new Size(70, 17);
             labelTime.TabIndex = 3;
             labelTime.Text = "HH:MM:SS";
             // 
@@ -205,50 +197,50 @@
             // 
             // userControlDashboard1
             // 
-            userControlDashboard1.Location = new System.Drawing.Point(472, 60);
-            userControlDashboard1.Margin = new System.Windows.Forms.Padding(12, 9, 12, 9);
+            userControlDashboard1.Location = new Point(236, 33);
+            userControlDashboard1.Margin = new Padding(6, 5, 6, 5);
             userControlDashboard1.Name = "userControlDashboard1";
-            userControlDashboard1.Size = new System.Drawing.Size(1654, 1056);
+            userControlDashboard1.Size = new Size(827, 579);
             userControlDashboard1.TabIndex = 4;
             // 
             // userControlTrans1
             // 
-            userControlTrans1.Location = new System.Drawing.Point(472, 60);
-            userControlTrans1.Margin = new System.Windows.Forms.Padding(12, 9, 12, 9);
+            userControlTrans1.Location = new Point(236, 33);
+            userControlTrans1.Margin = new Padding(0);
             userControlTrans1.Name = "userControlTrans1";
-            userControlTrans1.Size = new System.Drawing.Size(1654, 1056);
+            userControlTrans1.Size = new Size(827, 579);
             userControlTrans1.TabIndex = 5;
             // 
             // userControlAdvise1
             // 
-            userControlAdvise1.Location = new System.Drawing.Point(472, 60);
-            userControlAdvise1.Margin = new System.Windows.Forms.Padding(12, 9, 12, 9);
+            userControlAdvise1.Location = new Point(236, 33);
+            userControlAdvise1.Margin = new Padding(6, 5, 6, 5);
             userControlAdvise1.Name = "userControlAdvise1";
-            userControlAdvise1.Size = new System.Drawing.Size(1654, 1056);
+            userControlAdvise1.Size = new Size(827, 579);
             userControlAdvise1.TabIndex = 7;
             // 
             // userControlBudget1
             // 
-            userControlBudget1.Location = new System.Drawing.Point(472, 60);
-            userControlBudget1.Margin = new System.Windows.Forms.Padding(12, 9, 12, 9);
+            userControlBudget1.Location = new Point(236, 33);
+            userControlBudget1.Margin = new Padding(6, 5, 6, 5);
             userControlBudget1.Name = "userControlBudget1";
-            userControlBudget1.Size = new System.Drawing.Size(1654, 1056);
+            userControlBudget1.Size = new Size(827, 579);
             userControlBudget1.TabIndex = 8;
             // 
             // userControlReport1
             // 
-            userControlReport1.Font = new System.Drawing.Font("Microsoft YaHei UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)134));
-            userControlReport1.Location = new System.Drawing.Point(472, 60);
-            userControlReport1.Margin = new System.Windows.Forms.Padding(12, 9, 12, 9);
+            userControlReport1.Font = new Font("Microsoft YaHei UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 134);
+            userControlReport1.Location = new Point(236, 33);
+            userControlReport1.Margin = new Padding(6, 5, 6, 5);
             userControlReport1.Name = "userControlReport1";
-            userControlReport1.Size = new System.Drawing.Size(1654, 1056);
+            userControlReport1.Size = new Size(827, 579);
             userControlReport1.TabIndex = 9;
             // 
             // FormDashboard
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(14F, 31F);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(2126, 1120);
+            AutoScaleDimensions = new SizeF(7F, 17F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1063, 614);
             Controls.Add(userControlReport1);
             Controls.Add(userControlBudget1);
             Controls.Add(userControlAdvise1);
@@ -257,8 +249,8 @@
             Controls.Add(labelTime);
             Controls.Add(label2);
             Controls.Add(panel1);
-            Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
-            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Name = "FormDashboard";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Daily Expenses Tracker";
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

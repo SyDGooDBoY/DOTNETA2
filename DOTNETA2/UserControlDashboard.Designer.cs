@@ -56,10 +56,9 @@ namespace DOTNETA2
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(512, 348);
-            label1.Margin = new Padding(6, 0, 6, 0);
+            label1.Location = new Point(256, 191);
             label1.Name = "label1";
-            label1.Size = new Size(21, 31);
+            label1.Size = new Size(12, 17);
             label1.TabIndex = 0;
             label1.Text = " ";
             // 
@@ -69,7 +68,8 @@ namespace DOTNETA2
             chart1.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             chart1.Legends.Add(legend1);
-            chart1.Location = new Point(3, 3);
+            chart1.Location = new Point(0, 0);
+            chart1.Margin = new Padding(0);
             chart1.Name = "chart1";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
@@ -77,11 +77,11 @@ namespace DOTNETA2
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             chart1.Series.Add(series1);
-            chart1.Size = new Size(779, 430);
+            chart1.Size = new Size(390, 236);
             chart1.TabIndex = 1;
             chart1.Text = "chart1";
             title1.Name = "Title1";
-            title1.Text = "Details of expenditure classification -- "+DateTime.Now.Year+" "+CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(DateTime.Now.Month);
+            title1.Text = "Details of expenditure classification --  October";
             chart1.Titles.Add(title1);
             // 
             // chart2
@@ -93,92 +93,101 @@ namespace DOTNETA2
             legend2.Enabled = false;
             legend2.Name = "Legend1";
             chart2.Legends.Add(legend2);
-            chart2.Location = new Point(3, 439);
+            chart2.Location = new Point(2, 241);
+            chart2.Margin = new Padding(2);
             chart2.Name = "chart2";
             series2.ChartArea = "ChartArea1";
             series2.Legend = "Legend1";
             series2.Name = "Series1";
             chart2.Series.Add(series2);
-            chart2.Size = new Size(779, 482);
+            chart2.Size = new Size(390, 264);
             chart2.TabIndex = 2;
             title2.Name = "Title1";
-            title2.Text = "Monthly expenditure statistics -- "+DateTime.Now.Year;
+            title2.Text = "Monthly expenditure statistics -- ";
             chart2.Titles.Add(title2);
             // 
             // listView1
             // 
-            listView1.Location = new Point(788, 213);
+            listView1.Location = new Point(394, 117);
+            listView1.Margin = new Padding(2);
             listView1.Name = "listView1";
-            listView1.Size = new Size(771, 705);
+            listView1.Size = new Size(388, 388);
             listView1.TabIndex = 3;
             listView1.UseCompatibleStateImageBehavior = false;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(817, 23);
+            label2.Location = new Point(408, 13);
+            label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(122, 31);
+            label2.Size = new Size(64, 17);
             label2.TabIndex = 4;
             label2.Text = "Balance : ";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(1028, 23);
+            label3.Location = new Point(514, 13);
+            label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
-            label3.Size = new Size(183, 31);
+            label3.Size = new Size(95, 17);
             label3.TabIndex = 5;
             label3.Text = "Total Income : ";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(1267, 23);
+            label4.Location = new Point(634, 13);
+            label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
-            label4.Size = new Size(192, 31);
+            label4.Size = new Size(100, 17);
             label4.TabIndex = 6;
             label4.Text = "Total Expense : ";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(817, 82);
+            label5.Location = new Point(408, 45);
+            label5.Margin = new Padding(2, 0, 2, 0);
             label5.Name = "label5";
-            label5.Size = new Size(83, 31);
+            label5.Size = new Size(43, 17);
             label5.TabIndex = 7;
             label5.Text = "$ 1.00";
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(1053, 82);
+            label6.Location = new Point(526, 45);
+            label6.Margin = new Padding(2, 0, 2, 0);
             label6.Name = "label6";
-            label6.Size = new Size(83, 31);
+            label6.Size = new Size(43, 17);
             label6.TabIndex = 8;
             label6.Text = "$ 1.00";
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(1308, 82);
+            label7.Location = new Point(654, 45);
+            label7.Margin = new Padding(2, 0, 2, 0);
             label7.Name = "label7";
-            label7.Size = new Size(83, 31);
+            label7.Size = new Size(43, 17);
             label7.TabIndex = 9;
             label7.Text = "$ 1.00";
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(802, 179);
+            label8.Location = new Point(401, 98);
+            label8.Margin = new Padding(2, 0, 2, 0);
             label8.Name = "label8";
-            label8.Size = new Size(279, 31);
+            label8.Size = new Size(142, 17);
             label8.TabIndex = 10;
             label8.Text = "Recent 20 Transactions";
             // 
             // UserControlDashboard
             // 
-            AutoScaleDimensions = new SizeF(14F, 31F);
+            AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(label8);
             Controls.Add(label7);
@@ -191,9 +200,8 @@ namespace DOTNETA2
             Controls.Add(chart2);
             Controls.Add(chart1);
             Controls.Add(label1);
-            Margin = new Padding(6, 5, 6, 5);
             Name = "UserControlDashboard";
-            Size = new Size(1562, 921);
+            Size = new Size(781, 505);
             Load += UserControlDashboard_Load;
             ((System.ComponentModel.ISupportInitialize)chart1).EndInit();
             ((System.ComponentModel.ISupportInitialize)chart2).EndInit();

@@ -56,22 +56,22 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Microsoft YaHei UI", 16.125F, FontStyle.Regular, GraphicsUnit.Point, 134);
+            label1.Font = new Font("Century Gothic", 17.25F);
             label1.ForeColor = SystemColors.ControlLightLight;
-            label1.Location = new Point(183, 63);
-            label1.Margin = new Padding(6, 0, 6, 0);
+            label1.Location = new Point(39, 31);
             label1.Name = "label1";
-            label1.Size = new Size(525, 57);
+            label1.Size = new Size(289, 27);
             label1.TabIndex = 0;
             label1.Text = "Welcome to Transaction";
             // 
             // panel1
             // 
-            panel1.BackColor = SystemColors.HotTrack;
+            panel1.BackColor = Color.FromArgb(0, 71, 160);
             panel1.Controls.Add(label1);
             panel1.Location = new Point(0, 0);
+            panel1.Margin = new Padding(2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1562, 139);
+            panel1.Size = new Size(781, 76);
             panel1.TabIndex = 1;
             // 
             // panel2
@@ -87,16 +87,18 @@
             panel2.Controls.Add(label4);
             panel2.Controls.Add(label3);
             panel2.Controls.Add(label2);
-            panel2.Location = new Point(0, 139);
+            panel2.Location = new Point(0, 76);
+            panel2.Margin = new Padding(2);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1562, 209);
+            panel2.Size = new Size(781, 115);
             panel2.TabIndex = 2;
             // 
             // button2
             // 
-            button2.Location = new Point(846, 143);
+            button2.Location = new Point(423, 78);
+            button2.Margin = new Padding(2);
             button2.Name = "button2";
-            button2.Size = new Size(195, 53);
+            button2.Size = new Size(98, 29);
             button2.TabIndex = 9;
             button2.Text = "Clear";
             button2.UseVisualStyleBackColor = true;
@@ -104,9 +106,10 @@
             // 
             // button1
             // 
-            button1.Location = new Point(506, 143);
+            button1.Location = new Point(253, 78);
+            button1.Margin = new Padding(2);
             button1.Name = "button1";
-            button1.Size = new Size(195, 53);
+            button1.Size = new Size(98, 29);
             button1.TabIndex = 8;
             button1.Text = "Save";
             button1.UseVisualStyleBackColor = true;
@@ -114,69 +117,77 @@
             // 
             // numericUpDown1
             // 
-            numericUpDown1.Location = new Point(1354, 38);
+            numericUpDown1.Location = new Point(677, 21);
+            numericUpDown1.Margin = new Padding(2);
             numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(175, 38);
+            numericUpDown1.Size = new Size(88, 23);
             numericUpDown1.TabIndex = 7;
             // 
             // comboBox2
             // 
             comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(981, 38);
+            comboBox2.Location = new Point(490, 21);
+            comboBox2.Margin = new Padding(2);
             comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(162, 39);
+            comboBox2.Size = new Size(83, 25);
             comboBox2.TabIndex = 6;
             // 
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(600, 38);
+            comboBox1.Location = new Point(300, 21);
+            comboBox1.Margin = new Padding(2);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(162, 39);
+            comboBox1.Size = new Size(83, 25);
             comboBox1.TabIndex = 5;
             // 
             // dateTimePicker1
             // 
             dateTimePicker1.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             dateTimePicker1.Format = DateTimePickerFormat.Custom;
-            dateTimePicker1.Location = new Point(178, 38);
+            dateTimePicker1.Location = new Point(89, 21);
+            dateTimePicker1.Margin = new Padding(2);
             dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(279, 38);
+            dateTimePicker1.Size = new Size(142, 23);
             dateTimePicker1.TabIndex = 4;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(1221, 38);
+            label5.Location = new Point(610, 21);
+            label5.Margin = new Padding(2, 0, 2, 0);
             label5.Name = "label5";
-            label5.Size = new Size(107, 31);
+            label5.Size = new Size(53, 17);
             label5.TabIndex = 3;
             label5.Text = "Amount";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(835, 38);
+            label4.Location = new Point(418, 21);
+            label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
-            label4.Size = new Size(118, 31);
+            label4.Size = new Size(61, 17);
             label4.TabIndex = 2;
             label4.Text = "Category";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(512, 38);
+            label3.Location = new Point(256, 21);
+            label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
-            label3.Size = new Size(70, 31);
+            label3.Size = new Size(36, 17);
             label3.TabIndex = 1;
             label3.Text = "Type";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(78, 38);
+            label2.Location = new Point(39, 21);
+            label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(81, 31);
+            label2.Size = new Size(42, 17);
             label2.TabIndex = 0;
             label2.Text = "Date: ";
             // 
@@ -187,17 +198,19 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(3, 498);
+            dataGridView1.Location = new Point(2, 273);
+            dataGridView1.Margin = new Padding(2);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 82;
-            dataGridView1.Size = new Size(1562, 423);
+            dataGridView1.Size = new Size(781, 232);
             dataGridView1.TabIndex = 3;
             // 
             // button3
             // 
-            button3.Location = new Point(1145, 439);
+            button3.Location = new Point(572, 241);
+            button3.Margin = new Padding(2);
             button3.Name = "button3";
-            button3.Size = new Size(195, 53);
+            button3.Size = new Size(98, 29);
             button3.TabIndex = 10;
             button3.Text = "Edit";
             button3.UseVisualStyleBackColor = true;
@@ -205,9 +218,10 @@
             // 
             // button4
             // 
-            button4.Location = new Point(1354, 439);
+            button4.Location = new Point(677, 241);
+            button4.Margin = new Padding(2);
             button4.Name = "button4";
-            button4.Size = new Size(195, 53);
+            button4.Size = new Size(98, 29);
             button4.TabIndex = 10;
             button4.Text = "Delete";
             button4.UseVisualStyleBackColor = true;
@@ -215,16 +229,15 @@
             // 
             // UserControlTrans
             // 
-            AutoScaleDimensions = new SizeF(14F, 31F);
+            AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(button4);
             Controls.Add(button3);
             Controls.Add(dataGridView1);
             Controls.Add(panel2);
             Controls.Add(panel1);
-            Margin = new Padding(6, 5, 6, 5);
             Name = "UserControlTrans";
-            Size = new Size(1562, 921);
+            Size = new Size(781, 505);
             Load += UserControlTrans_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

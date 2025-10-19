@@ -28,127 +28,117 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.SuspendLayout();
-            //
-            // panel1 (Header)
-            //
-            this.panel1.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1562, 139);
-            this.panel1.TabIndex = 0;
-            //
-            // label1 (Title)
-            //
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label1.Location = new System.Drawing.Point(72, 50);
-            this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(220, 31);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Spending Advice";
-            //
-            // panel2 (Filters)
-            //
-            this.panel2.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panel2.Controls.Add(this.button1);
-            this.panel2.Controls.Add(this.comboBox2);
-            this.panel2.Controls.Add(this.comboBox1);
-            this.panel2.Controls.Add(this.label3);
-            this.panel2.Controls.Add(this.label2);
-            this.panel2.Location = new System.Drawing.Point(0, 139);
-            this.panel2.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1562, 120);
-            this.panel2.TabIndex = 1;
-            //
-            // button1 (Analyze)
-            //
-            this.button1.Location = new System.Drawing.Point(1088, 33);
-            this.button1.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(195, 53);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Analyze";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            //
-            // comboBox2 (Month)
-            //
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(720, 38);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(283, 39);
-            this.comboBox2.TabIndex = 3;
-            //
-            // comboBox1 (Year)
-            //
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(190, 38);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(283, 39);
-            this.comboBox1.TabIndex = 2;
-            //
-            // label3 (Month label)
-            //
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(590, 41);
-            this.label3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(104, 31);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Month :";
-            //
-            // label2 (Year label)
-            //
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(92, 41);
-            this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(77, 31);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Year :";
-            //
-            // listBox1 (Advice list)
-            //
-            this.listBox1.ItemHeight = 31;
-            this.listBox1.Location = new System.Drawing.Point(26, 280);
-            this.listBox1.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(1508, 596);
-            this.listBox1.TabIndex = 2;
-            //
+            panel1 = new Panel();
+            label1 = new Label();
+            panel2 = new Panel();
+            button1 = new Button();
+            comboBox2 = new ComboBox();
+            comboBox1 = new ComboBox();
+            label3 = new Label();
+            label2 = new Label();
+            listBox1 = new ListBox();
+            panel1.SuspendLayout();
+            panel2.SuspendLayout();
+            SuspendLayout();
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.FromArgb(0, 71, 160);
+            panel1.Controls.Add(label1);
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(781, 76);
+            panel1.TabIndex = 0;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Century Gothic", 17.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.ForeColor = SystemColors.ControlLightLight;
+            label1.Location = new Point(32, 32);
+            label1.Name = "label1";
+            label1.Size = new Size(209, 27);
+            label1.TabIndex = 0;
+            label1.Text = "Spending Advice";
+            // 
+            // panel2
+            // 
+            panel2.BackColor = SystemColors.ControlDark;
+            panel2.Controls.Add(button1);
+            panel2.Controls.Add(comboBox2);
+            panel2.Controls.Add(comboBox1);
+            panel2.Controls.Add(label3);
+            panel2.Controls.Add(label2);
+            panel2.Location = new Point(0, 76);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(781, 66);
+            panel2.TabIndex = 1;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(544, 18);
+            button1.Name = "button1";
+            button1.Size = new Size(98, 29);
+            button1.TabIndex = 4;
+            button1.Text = "Analyze";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
+            // comboBox2
+            // 
+            comboBox2.FormattingEnabled = true;
+            comboBox2.Location = new Point(360, 21);
+            comboBox2.Name = "comboBox2";
+            comboBox2.Size = new Size(144, 25);
+            comboBox2.TabIndex = 3;
+            // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(95, 21);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(144, 25);
+            comboBox1.TabIndex = 2;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(295, 22);
+            label3.Name = "label3";
+            label3.Size = new Size(53, 17);
+            label3.TabIndex = 1;
+            label3.Text = "Month :";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(46, 22);
+            label2.Name = "label2";
+            label2.Size = new Size(41, 17);
+            label2.TabIndex = 0;
+            label2.Text = "Year :";
+            // 
+            // listBox1
+            // 
+            listBox1.Location = new Point(13, 154);
+            listBox1.Name = "listBox1";
+            listBox1.Size = new Size(756, 327);
+            listBox1.TabIndex = 2;
+            // 
             // UserControlAdvise
-            //
-            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 31F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
-            this.Name = "UserControlAdvise";
-            this.Size = new System.Drawing.Size(1562, 921);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.ResumeLayout(false);
+            // 
+            AutoScaleDimensions = new SizeF(7F, 17F);
+            AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(listBox1);
+            Controls.Add(panel2);
+            Controls.Add(panel1);
+            Name = "UserControlAdvise";
+            Size = new Size(781, 505);
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
+            ResumeLayout(false);
         }
 
         #endregion
