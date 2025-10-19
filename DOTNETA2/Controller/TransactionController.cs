@@ -12,6 +12,9 @@ public class TransactionController
     
     //Display all transaction records
     public List<Transaction> ShowTransactions() => service.GetAllTransactions();
+    
+    //Return a single Transaction record by ID.
+    public Transaction? ShowOneTransaction(int id) => service.GetOneTransaction(id);
 
     
     //Keep records of income or Expense
@@ -23,6 +26,14 @@ public class TransactionController
     
     //Delete the  record by TransactionID
     public void DeleteTransaction(int id) => service.DeleteTransaction(id);
+    
+    //update the record
+    public void UpdataTransaction(int id,DateTime date,Type type,Category category,decimal amount)
+    {
+        Transaction transaction=new Transaction(date, type, category, amount);
+        transaction.Id = id;
+        service.UpdateTransaction(transaction);
+    }
 
     //Calculate the balance of all expenses and all income
     public decimal GetBalance() => service.GetBalance();
@@ -45,15 +56,15 @@ public class TransactionController
     
     //Return the transaction record by category
     public Dictionary<Category, decimal> GetRecordByType(Type type) =>
-        service.GetRecordByType(type);
+        service.GetRecordByYearAndMonth(type);
 
     //Return to the year with available data
     public List<int> GetAvailableYears() => service.GetAvailableYears();
 
-    //
+    //Return the records with count
     public List<Transaction> GetRecentTransactions(int count) => service.GetRecentTransactions(count);
 
     //Return the record corresponding to the maximum amount of expenditure/income in the specified category
-    public Transaction GetLargestByTypeAndCategory(Type type, Category category) =>
-        service.GetLargestByTypeAndCategory(type, category);
+    public List<Transaction> GetTransactionsByCategory(DateTime date,Type type, Category category) =>
+        service.GetTransactionsByCategory(date,type, category);
 }

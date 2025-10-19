@@ -1,124 +1,123 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Globalization;
-using System.Windows.Forms.DataVisualization.Charting;
-using System.Drawing.Text;
+﻿using System.Globalization;
+using DOTNETA2.Controller;
+using DOTNETA2.Entity;
+using DOTNETA2.Enum;
 
 namespace DOTNETA2
 {
     public partial class UserControlDashboard : UserControl
     {
+        private TransactionController tc = new TransactionController();
 
-        private Chart chartMonthly;
         public UserControlDashboard()
         {
             InitializeComponent();
-
-            // Load balance on initialization
-            LoadBalance();
-            //load monthly chart
-            CreateMonthlyCart();
-
         }
-
-        //show balance, income, expense
-        private void LoadBalance()
+        
+        //Load the latest 20 records.
+        private void LoadListView1()
         {
-            decimal totalIncome = 3000.00m;
-            decimal totalExpense = 3000.00m;
-            decimal balance = 3000.00m; // Replace with actual balance retrieval logic
+            listView1.View = View.Details;
+            listView1.FullRowSelect = true;
+            listView1.GridLines = true;
 
-            //change currency format from chinese to au
-            var au = new CultureInfoConverter().ConvertFromString("en-AU") as System.Globalization.CultureInfo;
-            lblBalanceValue.Text = balance.ToString("C", au);
-            lblExpenseValue.Text = totalExpense.ToString("C", au);
-            lblIncomeValue.Text = balance.ToString("C", au);
-        }
+            //Add table headers
+            listView1.Columns.Clear();
+            listView1.Columns.Add("Date", 280);
+            listView1.Columns.Add("Type", 130);
+            listView1.Columns.Add("Category", 150);
+            listView1.Columns.Add("Amount", 220);
 
-        //monthly chart
-        private void CreateMonthlyCart()
-        {
-            chartMonthly = new Chart { Dock = DockStyle.Fill };
-
-            var area = new ChartArea("Main");
-            area.AxisX.Interval = 1;
-            area.AxisX.Title = "Day";
-            area.AxisY.Title = "Amount";
-            area.AxisY.MajorGrid.LineDashStyle = ChartDashStyle.Dot;
-            area.AxisX.MajorGrid.Enabled = false;
-            chartMonthly.ChartAreas.Add(area);
-
-            var s = new Series("Expenses")
+            //Fill in the data
+            listView1.Items.Clear();
+            var au = new CultureInfo("en-AU");//Time zone changed to Australia
+            foreach (Transaction t in tc.GetRecentTransactions(20))
             {
-                ChartType = SeriesChartType.Column,
-                XValueType = ChartValueType.String,
-                YValueType = ChartValueType.Double
-            };
-            chartMonthly.Series.Add(s);
-
-            panelMonthlyHost.Controls.Add(chartMonthly);
-
-            // 来点数据~
-            LoadMonthlyFixedData();
-        }
-
-        private void LoadMonthlyFixedData()
-        {
-            // 1) 月份：用当前月，或固定到某月（例如 2025-10）
-            var monthStart = DateTime.Now;
-            // var monthStart = new DateTime(2025, 10, 1); // ← 固定月份时用这行
-            int days = DateTime.DaysInMonth(monthStart.Year, monthStart.Month);
-
-            // 2) 你的固定数据：key=日期(1..31), value=金额
-            var data = new Dictionary<int, decimal>
-    {
-        { 1,  23.50m },
-        { 3,  60.00m },
-        { 5,  18.20m },
-        { 12, 95.00m },
-        { 18, 40.75m },
-        { 22,120.00m },
-        { 28, 75.30m }
-    };
-
-            var au = new System.Globalization.CultureInfo("en-AU");
-            var series = chartMonthly.Series["Expenses"];
-            series.Points.Clear();
-
-            bool showAllDays = true; // =false 时只画有数据的天
-
-            if (showAllDays)
-            {
-                // 画满整月，其它天补 0
-                for (int d = 1; d <= days; d++)
-                {
-                    decimal val = data.TryGetValue(d, out var v) ? v : 0m;
-                    int pointIndex = series.Points.AddXY(d.ToString("00"), (double)val);
-                    series.Points[pointIndex].ToolTip = $"{monthStart:yyyy-MM}-{d:00}: {val.ToString("C", au)}";
-                }
-            }
-            else
-            {
-                // 只画有数据的天
-                foreach (var kv in data.OrderBy(k => k.Key))
-                {
-                    int d = kv.Key; decimal val = kv.Value;
-                    int pointIndex = series.Points.AddXY(d.ToString("00"), (double)val);
-                    series.Points[pointIndex].ToolTip = $"{monthStart:yyyy-MM}-{d:00}: {val.ToString("C", au)}";
-                }
+                var item = new ListViewItem($"{t.Date:yyyy-MM-dd HH:mm:ss}");
+                item.SubItems.Add(t.Type.ToString());
+                item.SubItems.Add(t.Category.ToString());
+                item.SubItems.Add(t.Amount.ToString("C", au));
+                listView1.Items.Add(item);
             }
         }
-
-        private void lblBalanceTitle_Click(object sender, EventArgs e)
+        
+        //Load pie chart
+        private void LoadCategoryChart()
         {
+            //Get data
+            Dictionary<Category, decimal> data = tc.GetRecordByYearAndMonth(DateTime.Now.Year, DateTime.Now.Month, Enum.Type.Expense);
+            //Calculate the total amount
+            decimal total = data.Values.Sum();
+            var groupedData = new Dictionary<string, decimal>();
+            decimal othersTotal = 0;
+            
+            //Process the data. If the proportion is less than 5%, it will be classified as "other".
+            foreach (var kv in data)
+            {
+                decimal percent = total == 0 ? 0 : kv.Value / total * 100;
+                if (percent < 5)
+                {
+                    othersTotal += kv.Value;
+                }
+                else
+                {
+                    groupedData[kv.Key.ToString()] = kv.Value;
+                }
+            }
+            if (othersTotal > 0) groupedData["Others"] = othersTotal;
+            chart1.Series[0].Points.Clear();
+            chart1.Series[0].Label="#AXISLABEL\nAUD #VALY{N2}"; 
+            chart1.Series[0].IsValueShownAsLabel = true;
+            chart1.Series[0]["PieLabelStyle"] = "Outside";
+            chart1.Series[0]["PieLineColor"] = "Gray";
+            chart1.Series[0].SmartLabelStyle.Enabled = true;
+            chart1.Series[0].SmartLabelStyle.MaxMovingDistance = 200;
+            
+            //Fill the processed data into the pie chart.
+            foreach (var d in groupedData)
+            {
+                chart1.Series[0].Points.AddXY(d.Key, d.Value);
+            }
+        }
+        
+        //Obtain the data and fill it into the bar chart
+        private void LoadMonthlyChart()
+        {
+            //Get data and fill in 
+            var data = tc.GetMonthlyRecords(DateTime.Now.Year, Enum.Type.Expense);
+            chart2.Series[0].Points.Clear();
+            for (int i = 0; i < data.Count; i++)
+            {
+                chart2.Series[0].Points.AddXY(i + 1, data[i]);
+            }
+            chart2.ChartAreas[0].AxisX.Title = "Month";
+            chart2.ChartAreas[0].AxisY.Title = "Expense";
+        }
+         
+        //Dynamically modify the content of the summary label
+        private void LoadDashboardSummary()
+        {
+            decimal balance = tc.GetBalance();
+            decimal totalIncome = tc.GetTotalIncome();
+            decimal totalExpense = tc.GetTotalExpense();
+            var au = new CultureInfo("en-AU");
+            label5.Text = balance.ToString("C", au);
+            label6.Text = totalIncome.ToString("C", au);
+            label7.Text = totalExpense.ToString("C", au);
+        }
 
+        private void UserControlDashboard_Load(object sender, EventArgs e)
+        {
+            LoadDashBoard();
+        }
+
+        //The methods that need to be called during page loading
+        public void LoadDashBoard()
+        {
+            LoadMonthlyChart();//load bar chart
+            LoadCategoryChart();//load pie chart
+            LoadListView1();//last 20 records
+            LoadDashboardSummary();//Update summary content
         }
     }
 }

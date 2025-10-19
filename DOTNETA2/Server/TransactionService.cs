@@ -9,9 +9,11 @@ public class TransactionService
 {
     private TransactionDAO dao =new TransactionDAO();
     
-    //Obtain all transaction records
+    //Return all transaction records
     public List<Transaction> GetAllTransactions() => dao.GetAll();
 
+    //Return a single Transaction record by ID.
+    public Transaction? GetOneTransaction(int id) => dao.GetOne(id);
     
     //add a transaction
     public void AddTransaction(Transaction transaction)
@@ -28,6 +30,12 @@ public class TransactionService
     public void DeleteTransaction(int id)
     {
         dao.Delete(id);
+    }
+    
+    //update transaction record
+    public void UpdateTransaction(Transaction transaction)
+    {
+        dao.Update(transaction);
     }
 
     //get total income
@@ -62,37 +70,28 @@ public class TransactionService
     //Return the transaction record by category for the specified month and year
     public Dictionary<Category, decimal> GetRecordByYearAndMonth(int year ,int month,Type type)
     {
-        Dictionary<Category, decimal> result = new Dictionary<Category, decimal>();
-        
-        var filtered = dao.GetAll()
+        Dictionary<Category, decimal> result = dao.GetAll()
             .Where(t => t.Date.Year == year)
             .Where(t => t.Date.Month == month)
             .Where(t => t.Type == type)
-            .Where(t => t.Category != null);
-        var grouped = filtered.GroupBy(t => t.Category);
-        foreach (var group in grouped)
-        {
-            result[group.Key] = group.Sum(t => t.Amount);
-        }
+            .GroupBy(t => t.Category)
+            .ToDictionary(t => t.Key, t => t.Sum(t => t.Amount));
         return result;
     }
     
     //Return the transaction record by category
-    public Dictionary<Category, decimal> GetRecordByType(Type type)
+    public Dictionary<Category, decimal> GetRecordByYearAndMonth(Type type)
     {
-        Dictionary<Category, decimal> result = new Dictionary<Category, decimal>();
-        
-        var filtered = dao.GetAll()
+        var result = dao.GetAll()
             .Where(t => t.Type == type)
-            .Where(t => t.Category != null);
-        var grouped = filtered.GroupBy(t => t.Category);
-        foreach (var group in grouped)
-        {
-            result[group.Key] = group.Sum(t => t.Amount);
-        }
+            // .Where(t => t.Category != null)
+            .GroupBy(t => t.Category)
+            .ToDictionary(t => t.Key, t => t.Sum(t => t.Amount));
+        
         return result;
     }
     
+    //Return years with available data
     public List<int> GetAvailableYears()
     {
         List<Transaction> transactions = dao.GetAll();
@@ -105,6 +104,7 @@ public class TransactionService
         return years;
     }
 
+    //Return the records with count
     public List<Transaction> GetRecentTransactions(int count)
     {
         return dao.GetAll().OrderByDescending(t => t.Date)
@@ -113,11 +113,12 @@ public class TransactionService
     }
 
     //Return the record corresponding to the maximum amount of expenditure/income in the specified category
-    public Transaction GetLargestByTypeAndCategory(Type type, Category category)
+    public List<Transaction> GetTransactionsByCategory(DateTime date,Type type, Category category)
     {
         return dao.GetAll().Where(t => t.Type == type)
             .Where(t => t.Category == category)
-            .OrderByDescending(t => t.Amount)
-            .FirstOrDefault();
+            .Where(t => t.Date.Year == date.Year)
+            .Where(t => t.Date.Month == date.Month)
+            .OrderByDescending(t => t.Amount).ToList();
     }
 }

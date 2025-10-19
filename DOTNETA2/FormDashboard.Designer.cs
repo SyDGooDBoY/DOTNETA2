@@ -60,9 +60,11 @@
             panel1.Controls.Add(button1);
             panel1.Controls.Add(pictureBox1);
             panel1.Controls.Add(panel2);
-            panel1.Location = new Point(-4, -16);
+            panel1.Dock = DockStyle.Left;
+            panel1.Location = new Point(0, 0);
+            panel1.Margin = new Padding(0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(238, 636);
+            panel1.Size = new Size(238, 614);
             panel1.TabIndex = 0;
             // 
             // button5
@@ -155,7 +157,7 @@
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(58, 15);
+            pictureBox1.Location = new Point(57, 26);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(131, 140);
             pictureBox1.TabIndex = 2;
@@ -195,39 +197,43 @@
             // 
             // userControlDashboard1
             // 
-            userControlDashboard1.Location = new Point(234, 33);
+            userControlDashboard1.Location = new Point(236, 33);
+            userControlDashboard1.Margin = new Padding(6, 5, 6, 5);
             userControlDashboard1.Name = "userControlDashboard1";
-            userControlDashboard1.Size = new Size(920, 580);
+            userControlDashboard1.Size = new Size(827, 579);
             userControlDashboard1.TabIndex = 4;
             // 
             // userControlTrans1
             // 
-            userControlTrans1.Location = new Point(233, 33);
+            userControlTrans1.Location = new Point(236, 33);
             userControlTrans1.Margin = new Padding(0);
             userControlTrans1.Name = "userControlTrans1";
-            userControlTrans1.Size = new Size(836, 580);
+            userControlTrans1.Size = new Size(827, 579);
             userControlTrans1.TabIndex = 5;
             // 
             // userControlAdvise1
             // 
-            userControlAdvise1.Location = new Point(233, 33);
+            userControlAdvise1.Location = new Point(236, 33);
+            userControlAdvise1.Margin = new Padding(6, 5, 6, 5);
             userControlAdvise1.Name = "userControlAdvise1";
-            userControlAdvise1.Size = new Size(835, 580);
+            userControlAdvise1.Size = new Size(827, 579);
             userControlAdvise1.TabIndex = 7;
             // 
             // userControlBudget1
             // 
-            userControlBudget1.Location = new Point(234, 33);
-            userControlBudget1.Margin = new Padding(0);
+            userControlBudget1.Location = new Point(236, 33);
+            userControlBudget1.Margin = new Padding(6, 5, 6, 5);
             userControlBudget1.Name = "userControlBudget1";
-            userControlBudget1.Size = new Size(835, 580);
+            userControlBudget1.Size = new Size(827, 579);
             userControlBudget1.TabIndex = 8;
             // 
             // userControlReport1
             // 
-            userControlReport1.Location = new Point(234, 33);
+            userControlReport1.Font = new Font("Microsoft YaHei UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 134);
+            userControlReport1.Location = new Point(236, 33);
+            userControlReport1.Margin = new Padding(6, 5, 6, 5);
             userControlReport1.Name = "userControlReport1";
-            userControlReport1.Size = new Size(835, 580);
+            userControlReport1.Size = new Size(827, 579);
             userControlReport1.TabIndex = 9;
             // 
             // FormDashboard
@@ -256,7 +262,7 @@
 
         private Panel panel1;
         private Panel panel2;
-        private PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox1;
         private Button button5;
         private Button button4;
         private Button button3;

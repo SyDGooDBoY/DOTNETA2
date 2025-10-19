@@ -20,18 +20,14 @@ namespace DOTNETA2
         }
 
         //load form
-        private void FormDashboard_Load(object sender, EventArgs e)
+        private void FormDashboard_Load(object? sender, EventArgs e)
         {
             //usercontrol hide
-            
+            userControlDashboard1.Show();
             userControlTrans1.Hide();
             userControlReport1.Hide();
             userControlBudget1.Hide();
             userControlAdvise1.Hide();
-
-            //when open show dashboard
-            userControlDashboard1.Show();
-            userControlDashboard1.BringToFront();
 
         }
         private void panel2_Paint(object sender, PaintEventArgs e)
@@ -43,7 +39,9 @@ namespace DOTNETA2
         {
             //show current usercontrol dashboard
             userControlDashboard1.Show();
+            userControlDashboard1.LoadDashBoard();
             userControlDashboard1.BringToFront();
+            
             //hide other usercontrol
             userControlTrans1.Hide();
             userControlReport1.Hide();
@@ -71,6 +69,9 @@ namespace DOTNETA2
 
             //hide other usercontrol
             userControlDashboard1.Hide();
+            userControlAdvise1.Hide();
+            userControlReport1.Hide();
+            userControlBudget1.Hide();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -91,6 +92,7 @@ namespace DOTNETA2
         {
             //show current usercontrol budget
             userControlBudget1.Show();
+            userControlBudget1.LoadBudget();
             userControlBudget1.BringToFront();
 
             //hide other usercontrol
@@ -104,6 +106,7 @@ namespace DOTNETA2
         {
             //show current usercontrol report
             userControlReport1.Show();
+            userControlReport1.LoadReport();
             userControlReport1.BringToFront();
 
             //hide other usercontrol

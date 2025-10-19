@@ -11,6 +11,7 @@ public class TransactionContext : DbContext
     {
         if (!optionsBuilder.IsConfigured)
         {
+            //Change to your account password
             string con = "server=localhost;database=finance_db;user=root;password=root;";
             optionsBuilder.UseMySql(con,ServerVersion.AutoDetect(con));
         }

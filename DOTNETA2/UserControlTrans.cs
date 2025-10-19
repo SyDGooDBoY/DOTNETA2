@@ -8,116 +8,177 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DOTNETA2.Controller;
+using DOTNETA2.Entity;
 
 namespace DOTNETA2
 {
     public partial class UserControlTrans : UserControl
     {
-        private BindingList<Transaction> _transactions;
-        private readonly CultureInfo _au = new CultureInfo("en-AU");
+        private int id=-1;//The id of the transaction that needs to be modified
+        private TransactionController tc = new TransactionController();
         public UserControlTrans()
         {
             InitializeComponent();
-            Load += (_, __) => InitTransactionPage();
         }
 
-        public class Transaction
+        private void UserControlTrans_Load(object sender, EventArgs e)
         {
-            public int Id { get; set; }
-            public DateTime Date { get; set; }
-            public string Category { get; set; } = "";
-            public string Type { get; set; } = ""; // "Income" or "Expense"
-            public decimal Amount { get; set; }
-            public string Note { get; set; } = "";
+            //input area
+            dateTimePicker1.Value = DateTime.Now;
+            comboBox1.DataSource = System.Enum.GetValues(typeof(DOTNETA2.Enum.Type));
+            comboBox2.DataSource = System.Enum.GetValues(typeof(DOTNETA2.Enum.Category));
+            numericUpDown1.DecimalPlaces = 2;
+            numericUpDown1.Maximum = 1000000;
+            LoadDataGridView1();
+            LoadAllTransactions();
         }
 
-        private void InitTransactionPage()
+        private void LoadDataGridView1()
         {
-            // 1️⃣ 假数据
-            _transactions = new BindingList<Transaction>(new List<Transaction>
+            //show area
+            if (dataGridView1.Columns["Amount"] == null)
             {
-                new Transaction { Id=1, Date=DateTime.Now.AddDays(-5), Category="Salary", Type="Income", Amount=3500, Note="Part-time" },
-                new Transaction { Id=2, Date=DateTime.Now.AddDays(-4), Category="Groceries", Type="Expense", Amount=80, Note="Coles" },
-                new Transaction { Id=3, Date=DateTime.Now.AddDays(-3), Category="Transport", Type="Expense", Amount=20, Note="Bus" },
-                new Transaction { Id=4, Date=DateTime.Now.AddDays(-2), Category="Dining", Type="Expense", Amount=45, Note="Dinner" },
-                new Transaction { Id=5, Date=DateTime.Now.AddDays(-1), Category="Gift", Type="Income", Amount=200, Note="Birthday" },
-            });
+                dataGridView1.Columns.Clear();
+                dataGridView1.Columns.Insert(0, new DataGridViewTextBoxColumn { Name = "Id", HeaderText = "Id", Visible = false });
+                dataGridView1.Columns.Add("Date", "Date");
+                dataGridView1.Columns.Add("Type", "Type");
+                dataGridView1.Columns.Add("Category", "Category");
+                dataGridView1.Columns.Add("Amount", "Amount");
+            }
 
-            // 2️⃣ 下拉框选项
-            cmbTypeFilter.Items.AddRange(new[] { "All", "Income", "Expense" });
-            cmbTypeFilter.SelectedIndex = 0;
-            cmbTypeFilter.SelectedIndexChanged += (_, __) => ApplyFilter();
-
-            // 3️⃣ DataGridView 设置
-            dgvTransactions.AutoGenerateColumns = false;
-            dgvTransactions.DataSource = _transactions;
-
-            dgvTransactions.Columns.Clear();
-            dgvTransactions.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Date", DataPropertyName = "Date", DefaultCellStyle = new DataGridViewCellStyle { Format = "yyyy-MM-dd" } });
-            dgvTransactions.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Category", DataPropertyName = "Category" });
-            dgvTransactions.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Type", DataPropertyName = "Type" });
-            dgvTransactions.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Amount", DataPropertyName = "Amount", DefaultCellStyle = new DataGridViewCellStyle { Format = "C", FormatProvider = _au } });
-            dgvTransactions.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Note", DataPropertyName = "Note" });
-
-            dgvTransactions.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvTransactions.MultiSelect = false;
-            dgvTransactions.AllowUserToAddRows = false;
-            dgvTransactions.ReadOnly = true;
-
-            // 4️按钮事件
-            //btnAdd.Click += (_, __) => AddNewTransaction();
-            btnDelete.Click += (_, __) => DeleteSelectedTransaction();
+            //Align the amounts to the right and apply currency formatting.
+            var amountCol = dataGridView1.Columns["Amount"];
+            if (amountCol != null)
+            {
+                amountCol.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                amountCol.DefaultCellStyle.Format = "C";
+            }
+            
+            //Modification of dataGridView style
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.ReadOnly = true;
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.RowHeadersVisible = false;
         }
 
-        private void ApplyFilter()
+        
+        //Save button 
+        private void button1_Click(object sender, EventArgs e)
         {
-            string filter = cmbTypeFilter.SelectedItem?.ToString() ?? "All";
-            if (filter == "All")
+            //Get data from page
+            var date = dateTimePicker1.Value;
+            if (comboBox1.SelectedItem is not DOTNETA2.Enum.Type type ||
+                comboBox2.SelectedItem is not DOTNETA2.Enum.Category category)
             {
-                dgvTransactions.DataSource = _transactions;
+                MessageBox.Show("Please select a valid Type and Category.");
+                return;
+            }
+            var amount = numericUpDown1.Value;
+            if (amount <= 0)
+            {
+                MessageBox.Show("Amount must be greater than 0.");
+                return;
+            }
+            
+            //Determine whether it is a new addition or an update.
+            if (id <0)
+            {
+                //new addition
+                tc.AddTransaction(date, type, category, amount);
+                MessageBox.Show("Successful added!");
             }
             else
             {
-                var filtered = _transactions.Where(t => t.Type == filter).ToList();
-                dgvTransactions.DataSource = new BindingList<Transaction>(filtered);
+                // update
+                tc.UpdataTransaction(id, date, type, category, amount);
+                id = -1;
+                button1.Text = "Save";
+                MessageBox.Show("Successfully update!");
+            }
+            Reset();//Reset page
+            LoadAllTransactions();
+        }
+
+        //Reset button
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Reset();
+        }
+
+        //Reset page content
+        private void Reset()
+        {
+            dateTimePicker1.Value = DateTime.Today;
+            comboBox1.SelectedIndex = 0;
+            comboBox2.SelectedIndex = 0;
+            numericUpDown1.Value = 0;
+            button1.Text = "Save";
+            id = -1;
+        }
+
+        //Load data into the DataGridView
+        private void LoadAllTransactions()
+        {
+            dataGridView1.Rows.Clear(); //Clear old data
+            var list = tc.ShowTransactions(); // Get data from database
+            var au = new CultureInfo("en-AU");
+            //Fill in the data
+            foreach (var t in list)
+            {
+                dataGridView1.Rows.Add(
+                    t.Id,
+                    t.Date.ToString("yyyy-MM-dd HH:mm"),
+                    t.Type.ToString(),
+                    t.Category.ToString(),
+                    t.Amount.ToString("C", au)
+                );
             }
         }
 
-        private void AddNewTransaction()
+        //Delete button
+        private void button4_Click(object sender, EventArgs e)
         {
-            //// 简单弹窗输入
-            //using (var form = new AddTransactionForm(_transactions))
-            //{
-            //    form.ShowDialog();
-            //    ApplyFilter();
-            //}
-        }
-
-        private void DeleteSelectedTransaction()
-        {
-            if (dgvTransactions.SelectedRows.Count == 0)
+            if (dataGridView1.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Please select a transaction to delete.", "Notice");
+                MessageBox.Show("Please select a record to delete.");
                 return;
             }
 
-            var tx = dgvTransactions.SelectedRows[0].DataBoundItem as Transaction;
-            if (tx != null)
+            var row = dataGridView1.SelectedRows[0];
+            int id = Convert.ToInt32(row.Cells["Id"].Value);
+
+            if (MessageBox.Show("Delete this transaction?", "Confirm",
+                    MessageBoxButtons.YesNo) != DialogResult.Yes) return;
+
+            tc.DeleteTransaction(id);
+            LoadAllTransactions();
+        }
+
+        //Edit button
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 0)
             {
-                _transactions.Remove(tx);
-                ApplyFilter();
+                MessageBox.Show("Please select a record to edit.");
+                return;
             }
-        }
-    
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
+            var r = dataGridView1.SelectedRows[0];
+            id = Convert.ToInt32(r.Cells["Id"].Value);//Obtain the id of the selected record
+            Transaction? transaction = tc.ShowOneTransaction(id);
+            if (transaction==null)
+            {
+                MessageBox.Show("The selected record is invalid.");
+                return;
+            }
+            
+            //Write the data back to the editing area
+            dateTimePicker1.Value = transaction.Date;
+            comboBox1.SelectedItem = System.Enum.Parse<DOTNETA2.Enum.Type>(transaction.Type.ToString());
+            comboBox2.SelectedItem=System.Enum.Parse<DOTNETA2.Enum.Category>(transaction.Category.ToString());
+            numericUpDown1.Value = transaction.Amount;
+            button1.Text = "Update";
         }
     }
 }
