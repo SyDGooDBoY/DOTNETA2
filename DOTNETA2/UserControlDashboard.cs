@@ -32,10 +32,10 @@ namespace DOTNETA2
 
             // 添加列头
             listView1.Columns.Clear();
-            listView1.Columns.Add("Date", 130);
-            listView1.Columns.Add("Type", 60);
-            listView1.Columns.Add("Category", 103);
-            listView1.Columns.Add("Amount", 90);
+            listView1.Columns.Add("Date", 280);
+            listView1.Columns.Add("Type", 130);
+            listView1.Columns.Add("Category", 150);
+            listView1.Columns.Add("Amount", 220);
 
             listView1.Items.Clear();
             var au = new CultureInfo("en-AU");
