@@ -1,219 +1,116 @@
-﻿// File: Advise.cs
-// Purpose: Self-contained "Advise" feature (no changes to existing files)
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DOTNETA2.Enum;        // Category enum
-using DOTNETA2.Entity;      // Transaction model (implicitly referenced)
-using DOTNETA2.Server;      // TransactionService
-using TxType = DOTNETA2.Enum.Type;  // Alias to avoid conflict with System.Type
+using DOTNETA2.Controller;
+using DOTNETA2.Enum;
+using DOTNETA2.Entity;
 
 namespace DOTNETA2.Advise
 {
-    // Simple severity levels for UI display
-    public enum AdviceSeverity { Info, Warning, Critical }
-
-    // Lightweight DTO to render advice items
-    public class AdviceItem
+    public static class SpendingAdvisor
     {
-        public AdviceSeverity Severity { get; set; }
-        public string Title { get; set; } = "";
-        public string Why { get; set; } = "";
-        public string Action { get; set; } = "";
-    }
-
-    // Rule-based, deterministic advise engine
-    public class AdviseService
-    {
-        private readonly TransactionService _tx;
-
-        // Tunable thresholds
-        private const int    BASELINE_MONTHS = 3;      // look back N months
-        private const decimal SPIKE_PCT      = 0.30m;  // >= +30% vs baseline
-        private const decimal SPIKE_MIN_ABS  = 50m;    // and +$50 at least
-        private const decimal SAVINGS_OK     = 0.10m;  // <10% monthly savings => warn
-        private const int    STREAK_WARN     = 10;     // >10 consecutive spend days
-
-        public AdviseService(TransactionService tx) => _tx = tx;
-
         /// <summary>
-        /// Produce up to 5 actionable suggestions for a given (year, month).
+        /// Generate simple rule-based advice for a given month.
         /// </summary>
-        public List<AdviceItem> Generate(int year, int month)
+        public static List<string> BuildAdvice(TransactionController tc, int year, int month)
         {
-            var res = new List<AdviceItem>();
+            var tips = new List<string>();
 
-            res.AddRange(Rule_CategorySpikeVsBaseline(year, month));  // uses GetRecordByYearAndMonth:contentReference[oaicite:1]{index=1}
-            res.AddRange(Rule_TopSpenders(year, month));              // uses GetRecordByYearAndMonth:contentReference[oaicite:2]{index=2}
+            // 1) Current month category totals
+            Dictionary<Category, decimal> catTotals =
+                tc.GetRecordByYearAndMonth(year, month, Enum.Type.Expense); // existing API
 
-            var sr = Rule_SavingsRate(year, month);                   // uses GetMonthlyRecords:contentReference[oaicite:3]{index=3}
-            if (sr != null) res.Add(sr);
-
-            var streak = Rule_SpendingStreak(year, month);            // uses GetAllTransactions:contentReference[oaicite:4]{index=4}
-            if (streak != null) res.Add(streak);
-
-            return res.Take(5).ToList();
-        }
-
-        // ---------- RULE 1: Category spike vs baseline (last 3 months) ----------
-        private IEnumerable<AdviceItem> Rule_CategorySpikeVsBaseline(int year, int month)
-        {
-            var items = new List<AdviceItem>();
-            var thisMonth = _tx.GetRecordByYearAndMonth(year, month, TxType.Expense); // cat->amount:contentReference[oaicite:5]{index=5}
-            if (thisMonth.Count == 0) return items;
-
-            var prev = PreviousMonths(year, month, BASELINE_MONTHS);
-
-            // Average baseline per category across previous months
-            var baseline = new Dictionary<Category, decimal>();
-            foreach (var (y, m) in prev)
+            decimal monthTotal = catTotals.Values.Sum();
+            if (monthTotal <= 0)
             {
-                var mDict = _tx.GetRecordByYearAndMonth(y, m, TxType.Expense);        // :contentReference[oaicite:6]{index=6}
-                foreach (var kv in mDict)
+                tips.Add("No expense records for the selected month. Keep tracking to receive tailored advice.");
+                return tips;
+            }
+
+            // 2) Top categories by share
+            var topCats = catTotals
+                .OrderByDescending(kv => kv.Value)
+                .Take(3)
+                .ToList();
+
+            foreach (var (cat, amount) in topCats)
+            {
+                decimal share = amount / monthTotal;
+                if (share >= 0.30m)
                 {
-                    if (!baseline.ContainsKey(kv.Key)) baseline[kv.Key] = 0m;
-                    baseline[kv.Key] += kv.Value;
+                    tips.Add($"High concentration: {cat} is {share:P0} of this month’s spending. Consider reducing variable items in this category.");
+                }
+                else if (share >= 0.20m)
+                {
+                    tips.Add($"{cat} takes {share:P0}. Set a soft cap (e.g., 10–15% lower next month) and monitor weekly.");
                 }
             }
-            if (prev.Count > 0)
+
+            // 3) Month-over-month spike vs. last 3 months (rolling average)
+            decimal last3Avg = GetLastNMonthsAverage(tc, year, month, 3);
+            if (last3Avg > 0)
             {
-                foreach (var k in baseline.Keys.ToList())
-                    baseline[k] = baseline[k] / prev.Count;
-            }
-
-            foreach (var kv in thisMonth.OrderByDescending(k => k.Value))
-            {
-                var cat = kv.Key;
-                var cur = kv.Value;
-                var avg = baseline.TryGetValue(cat, out var b) ? b : 0m;
-                if (avg <= 0) continue; // no baseline → skip
-
-                var diff  = cur - avg;
-                var pctUp = diff / avg;
-
-                if (diff >= SPIKE_MIN_ABS && pctUp >= SPIKE_PCT)
+                decimal growth = (monthTotal - last3Avg) / last3Avg;
+                if (growth >= 0.2m)
                 {
-                    items.Add(new AdviceItem
-                    {
-                        Severity = AdviceSeverity.Warning,
-                        Title    = $"Spike in {cat}",
-                        Why      = $"{cat} is up {pctUp:P0} this month (+{diff:C}).",
-                        Action   = $"Set a soft cap for {cat} around {(avg * 1.1m):C}–{(avg * 1.2m):C} next month."
-                    });
+                    tips.Add($"Spending spike: total expenses are {growth:P0} above your 3-month average. Review large or new recurring items.");
+                }
+                else if (growth <= -0.2m)
+                {
+                    tips.Add("Good trend: expenses are ≥20% below your 3-month average. Consider moving the surplus to savings.");
                 }
             }
-            return items;
-        }
 
-        // ---------- RULE 2: Top spenders this month ----------
-        private IEnumerable<AdviceItem> Rule_TopSpenders(int year, int month)
-        {
-            var items = new List<AdviceItem>();
-            var byCat = _tx.GetRecordByYearAndMonth(year, month, TxType.Expense);     // :contentReference[oaicite:7]{index=7}
-            if (byCat.Count == 0) return items;
-
-            var total = byCat.Values.Sum();
-            var top2  = byCat.OrderByDescending(k => k.Value).Take(2);
-
-            foreach (var kv in top2)
+            // 4) Transaction patterns within each top category
+            foreach (var (cat, amount) in topCats)
             {
-                var share = total > 0 ? kv.Value / total : 0m;
-                items.Add(new AdviceItem
+                // reuse your existing per-category query API
+                var list = tc.GetTransactionsByCategory(new DateTime(year, month, 1), Enum.Type.Expense, cat);
+                if (list == null || list.Count == 0) continue;
+
+                // Many small purchases → suggest batching
+                int smallCount = list.Count(t => t.Amount < 20);
+                if (smallCount >= 10)
                 {
-                    Severity = share >= 0.30m ? AdviceSeverity.Warning : AdviceSeverity.Info,
-                    Title    = $"Top expense: {kv.Key} {kv.Value:C}",
-                    Why      = $"{kv.Key} accounts for {share:P0} of this month’s outflows.",
-                    Action   = $"Trim {kv.Key} by {(kv.Value * 0.10m):C} next month."
-                });
-            }
-            return items;
-        }
+                    tips.Add($"{cat}: many small purchases detected (≥10 under $20). Try batching or weekly shopping lists to avoid impulse buys.");
+                }
 
-        // ---------- RULE 3: Savings rate for (year, month) ----------
-        private AdviceItem? Rule_SavingsRate(int year, int month)
-        {
-            var i12 = _tx.GetMonthlyRecords(year, TxType.Income);                     // :contentReference[oaicite:8]{index=8}
-            var e12 = _tx.GetMonthlyRecords(year, TxType.Expense);                    // :contentReference[oaicite:9]{index=9}
-            var idx = month - 1;
-            if (idx < 0 || idx >= 12) return null;
-
-            var income  = i12[idx];
-            var expense = e12[idx];
-            if (income <= 0) return null; // nothing to assess
-
-            var savings = income - expense;
-            var rate    = savings / income;
-
-            if (rate < SAVINGS_OK)
-            {
-                return new AdviceItem
+                // One very large purchase → sanity check or installment
+                var maxTx = list.OrderByDescending(t => t.Amount).First();
+                if (maxTx.Amount >= 0.25m * monthTotal)
                 {
-                    Severity = AdviceSeverity.Warning,
-                    Title    = $"Low savings rate ({rate:P0})",
-                    Why      = $"Income {income:C} vs Expense {expense:C}. Savings {savings:C}.",
-                    Action   = "Aim for 15–20% savings; reduce your largest discretionary category."
-                };
+                    tips.Add($"{cat}: one large transaction (${maxTx.Amount:N2} on {maxTx.Date:yyyy-MM-dd}). Verify necessity or consider installments.");
+                }
             }
-            return new AdviceItem
-            {
-                Severity = AdviceSeverity.Info,
-                Title    = $"Healthy savings rate ({rate:P0})",
-                Why      = $"Income {income:C}, Expense {expense:C}.",
-                Action   = "Maintain habits; consider auto-transfer to savings on payday."
-            };
+
+            // 5) Generic housekeeping
+            if (monthTotal >= 1000 && !topCats.Any(kv => kv.Key.ToString().Contains("Saving")))
+                tips.Add("Consider setting an automated monthly transfer to savings right after payday.");
+
+            if (tips.Count == 0)
+                tips.Add("Spending looks balanced this month. Keep consistent tracking and consider setting a small saving target.");
+
+            return tips;
         }
 
-        // ---------- RULE 4: Consecutive-days spending streak ----------
-        private AdviceItem? Rule_SpendingStreak(int year, int month)
+        private static decimal GetLastNMonthsAverage(TransactionController tc, int year, int month, int n)
         {
-            var tx = _tx.GetAllTransactions()                                          // :contentReference[oaicite:10]{index=10}
-                        .Where(t => t.Type == TxType.Expense)
-                        .Where(t => t.Date.Year == year && t.Date.Month == month)
-                        .OrderBy(t => t.Date.Date)
-                        .ToList();
-            if (tx.Count == 0) return null;
+            decimal sum = 0;
+            int count = 0;
+            var cursor = new DateTime(year, month, 1);
 
-            var days = tx.Select(t => t.Date.Date).Distinct().OrderBy(d => d).ToList();
-            int best = 1, cur = 1;
-            for (int i = 1; i < days.Count; i++)
+            for (int i = 1; i <= n; i++)
             {
-                if ((days[i] - days[i - 1]).TotalDays == 1) cur++;
-                else cur = 1;
-                if (cur > best) best = cur;
-            }
-
-            if (best > STREAK_WARN)
-            {
-                return new AdviceItem
+                cursor = cursor.AddMonths(-1);
+                var dict = tc.GetRecordByYearAndMonth(cursor.Year, cursor.Month, Enum.Type.Expense);
+                decimal total = dict.Values.Sum();
+                if (total > 0)
                 {
-                    Severity = AdviceSeverity.Warning,
-                    Title    = $"Long spending streak ({best} days)",
-                    Why      = "You logged expenses on many consecutive days.",
-                    Action   = "Try a no-spend day this week and pre-plan meals/transport."
-                };
+                    sum += total;
+                    count++;
+                }
             }
-            return null;
-        }
-
-        // ---------- Helpers ----------
-        private static List<(int y, int m)> PreviousMonths(int year, int month, int count)
-        {
-            var res = new List<(int, int)>();
-            var d = new DateTime(year, month, 1);
-            for (int i = 1; i <= count; i++)
-            {
-                var p = d.AddMonths(-i);
-                res.Add((p.Year, p.Month));
-            }
-            return res;
+            return count > 0 ? sum / count : 0;
         }
     }
 }
-
-//use example:
-// var txService = new DOTNETA2.Server.TransactionService();
-// var advise    = new DOTNETA2.Features.AdviseService(txService);
-// var tips      = advise.Generate(DateTime.Now.Year, DateTime.Now.Month);
-// // bind tips to a ListView/DataGridView in your Advise UI
-

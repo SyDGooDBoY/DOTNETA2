@@ -92,6 +92,7 @@ namespace DOTNETA2
         {
             //show current usercontrol budget
             userControlBudget1.Show();
+            userControlBudget1.LoadBudget();
             userControlBudget1.BringToFront();
 
             //hide other usercontrol

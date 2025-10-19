@@ -80,42 +80,42 @@ public class TestTransactionController
     
 
 
-    [Test]
-    public void Test_Advise_Generate_ForCurrentMonth()
-    {
-        var tx = new TransactionService();
-        var adv = new AdviseService(tx);
-
-        int year = DateTime.Now.Year;
-        int month = DateTime.Now.Month;
-
-        var tips = adv.Generate(year, month);
-
-        TestContext.WriteLine($"Advice for {year}-{month:D2}: {tips.Count} item(s).");
-        foreach (var t in tips)
-        {
-            TestContext.WriteLine($"[{t.Severity}] {t.Title}");
-            TestContext.WriteLine($"  Why:    {t.Why}");
-            TestContext.WriteLine($"  Action: {t.Action}");
-        }
-
-        Assert.That(tips, Is.Not.Null);
-    }
-
-    [Test]
-    public void Test_Advise_Generate_ForSpecificMonth_NoCrashWhenNoData()
-    {
-        var tx = new TransactionService();
-        var adv = new AdviseService(tx);
-
-        var tips = adv.Generate(2025, 10);
-
-        TestContext.WriteLine($"Advice for 2025-10: {tips.Count} item(s).");
-        foreach (var t in tips)
-        {
-            TestContext.WriteLine($"[{t.Severity}] {t.Title}");
-        }
-
-        Assert.That(tips, Is.Not.Null);
-    }
+    // [Test]
+    // public void Test_Advise_Generate_ForCurrentMonth()
+    // {
+    //     var tx = new TransactionService();
+    //     var adv = new AdviseService(tx);
+    //
+    //     int year = DateTime.Now.Year;
+    //     int month = DateTime.Now.Month;
+    //
+    //     var tips = adv.Generate(year, month);
+    //
+    //     TestContext.WriteLine($"Advice for {year}-{month:D2}: {tips.Count} item(s).");
+    //     foreach (var t in tips)
+    //     {
+    //         TestContext.WriteLine($"[{t.Severity}] {t.Title}");
+    //         TestContext.WriteLine($"  Why:    {t.Why}");
+    //         TestContext.WriteLine($"  Action: {t.Action}");
+    //     }
+    //
+    //     Assert.That(tips, Is.Not.Null);
+    // }
+    //
+    // [Test]
+    // public void Test_Advise_Generate_ForSpecificMonth_NoCrashWhenNoData()
+    // {
+    //     var tx = new TransactionService();
+    //     var adv = new AdviseService(tx);
+    //
+    //     var tips = adv.Generate(2025, 10);
+    //
+    //     TestContext.WriteLine($"Advice for 2025-10: {tips.Count} item(s).");
+    //     foreach (var t in tips)
+    //     {
+    //         TestContext.WriteLine($"[{t.Severity}] {t.Title}");
+    //     }
+    //
+    //     Assert.That(tips, Is.Not.Null);
+    // }
 }
