@@ -3,6 +3,7 @@ using DOTNETA2.Entity;
 using DOTNETA2.Enum;
 using DOTNETA2.Server;
 using DOTNETA2.Advise;
+using DOTNETA2.DAO;
 using Type = DOTNETA2.Enum.Type;
 
 namespace NUnitA2;
@@ -12,17 +13,28 @@ public class TestTransactionController
 {
     private TransactionController transactionController = new TransactionController();
 
-    [Test]
-    public void Test_AddTransaction()
+    [SetUp]
+    public void Setup()
     {
-        transactionController.AddTransaction(new DateTime(2025, 10, 4, 4, 24, 34), Type.Expense, Category.OtherExpense,
-            (decimal)110.5);
+        using (var db = new TransactionContext())
+        {
+            db.Database.EnsureCreated();
+        }
+    }
+    
+    [TestCase(2025, 10, 4, 4, 24, 34, Type.Expense, Category.Gift, 110.5)]
+    [TestCase(2025, 8, 15, 12, 10, 0, Type.Income, Category.Salary, 200)]
+    [TestCase(2025, 7, 1, 9, 0, 0, Type.Expense, Category.Dining, 35.75)]
+    public void Test_AddTransaction(int year, int month, int day, int hour, int minute, int second, Type type, Category category, decimal amount)
+    {
+        var date = new DateTime(year, month, day, hour, minute, second);
+        transactionController.AddTransaction(date, type, category, amount);
     }
 
     [Test]
     public void Test_deleteTransaction()
     {
-        transactionController.DeleteTransaction(3);
+        transactionController.DeleteTransaction(2);
         Assert.Pass("Setup Successful!");
     }
 
