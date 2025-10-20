@@ -81,7 +81,7 @@ namespace DOTNETA2
             chart1.TabIndex = 1;
             chart1.Text = "chart1";
             title1.Name = "Title1";
-            title1.Text = "Details of expenditure classification --  October";
+            title1.Text = "Details of expenditure classification --  "+CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(DateTime.Now.Month);
             chart1.Titles.Add(title1);
             // 
             // chart2
@@ -103,7 +103,7 @@ namespace DOTNETA2
             chart2.Size = new Size(390, 264);
             chart2.TabIndex = 2;
             title2.Name = "Title1";
-            title2.Text = "Monthly expenditure statistics -- ";
+            title2.Text = "Monthly expenditure statistics -- "+DateTime.Now.Year;
             chart2.Titles.Add(title2);
             // 
             // listView1
