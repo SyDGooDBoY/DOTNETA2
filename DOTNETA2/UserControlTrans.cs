@@ -110,7 +110,7 @@ namespace DOTNETA2
         //Reset page content
         private void Reset()
         {
-            dateTimePicker1.Value = DateTime.Today;
+            dateTimePicker1.Value = DateTime.Now;
             comboBox1.SelectedIndex = 0;
             comboBox2.SelectedIndex = 0;
             numericUpDown1.Value = 0;
