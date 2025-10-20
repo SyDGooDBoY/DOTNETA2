@@ -63,7 +63,7 @@ namespace DOTNETA2
             if (comboBox1.SelectedItem == null)
             {
                 label13.Text = "—";
-                label12.Text = "—";
+                label12.Text = "A$0.00";
                 label11.Text = "—";
                 label10.Text = "A$0.00";
                 label9.Text = "0%";
@@ -77,7 +77,7 @@ namespace DOTNETA2
 
             //When the title is updated, reset the category details simultaneously.
             label13.Text = "—";
-            label12.Text = "—";
+            label12.Text = "A$0.00";
             label11.Text = "—";
             label10.Text = "A$0.00";
             label9.Text = "0%";
@@ -119,7 +119,9 @@ namespace DOTNETA2
             {
                 chart1.Series[0].Points.AddXY(d.Key.ToString(), d.Value);
             }
-            var top = data.OrderByDescending(d => d.Value).First();
+            var top = data.OrderByDescending(d => d.Value).FirstOrDefault();
+            if (top.Key == null)
+                return;
             UpdateCategoryDetails(top.Key.ToString());
         }
 
@@ -166,8 +168,8 @@ namespace DOTNETA2
             //Initialization display when no valid data is available
             if (list == null || list.Count == 0)
             {
-                label13.Text = categoryName;
-                label12.Text = "—";
+                label13.Text = "—";
+                label12.Text = "A$0.00";
                 label11.Text = "—";
                 label10.Text = "A$0.00";
                 label9.Text = "0%";
